@@ -17,19 +17,16 @@
         <header>
             <h1>Hero Electronics</h1>
         </header>
-
         <hr />
         <nav>
-            <a href="customers.html">Customers</a> | <a href="orders.html">Orders</a> | <a href="stores.html">Stores</a>
-            | <a href="products">Products</a>
+            <a href="/customers">Customers</a> | <a href="/orders">Orders</a> | <a href="/stores">Stores</a>
+            | <a href="/products">Products</a>
         </nav>
         <hr />
-
         <h2>Customers</h2>
 
         <div>
             <table>
-                <caption>Customers</caption>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -93,17 +90,14 @@
             <form method="POST">
                 <fieldset>
                     <legend>Add New Cusotmer</legend>
-                    <label>First Name</label>
-                    <input type="text" name="first_name" required />
-                    <br />
-                    <label>Last Name</label>
-                    <input type="text" name="last_name" required />
+                    <label>Name</label>
+                    <input type="text" name="customer_name" placeholder="first last" required />
                     <br />
                     <label>Phone Number</label>
-                    <input type="tel" name="customer_phone" required />
+                    <input type="tel" name="customer_phone" placeholder="(555) 123-4567" required />
                     <br />
                     <label>Email</label>
-                    <input type="email" name="customer_email" required />
+                    <input type="email" name="customer_email" placeholder="something@example.com" required />
                 </fieldset>
                 <input type="submit" value="Add" />
                 <input type="button" value="Cancel" />
@@ -120,11 +114,8 @@
                     <label>Customer ID</label>
                     <input value="1" disabled />
                     <br />
-                    <label>First Name</label>
-                    <input type="text" name="first_name" value="Ava" required />
-                    <br />
-                    <label>Last Name</label>
-                    <input type="text" name="last_name" value="Moreno" required />
+                    <label>Name</label>
+                    <input type="text" name="customer_name" value="Ava Moreno" required />
                     <br />
                     <label>Phone Number</label>
                     <input type="tel" name="customer_phone" value="(562) 201-9464" required />
@@ -145,11 +136,17 @@
                 <fieldset>
                     <legend>Delete Customer</legend>
                     <p>Warning: The following action cannot be undone.</p>
-                    <label>Customer ID</label>
-                    <input value="1" disabled />
-                    <br />
-                    <label>Customer Name</label>
-                    <input value="Ava Moreno" disabled />
+                    <fieldset>
+                        <legend>Customer Details</legend>
+                        <label>Customer ID</label>
+                        <input value="1" disabled />
+                        <br />
+                        <label>Customer Name</label>
+                        <input value="Ava Moreno" disabled />
+                        <br />
+                        <label>Customer Email</label>
+                        <input value="ava.moreno@example.com" disabled />
+                    </fieldset>
                 </fieldset>
                 <input type="submit" value="Delete" />
                 <input type="button" value="Cancel" />
