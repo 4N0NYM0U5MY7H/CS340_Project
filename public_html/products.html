@@ -17,14 +17,12 @@
         <header>
             <h1>Hero Electronics</h1>
         </header>
-
         <hr />
         <nav>
-            <a href="customers.html">Customers</a> | <a href="orders.html">Orders</a> | <a href="stores.html">Stores</a>
-            | <a href="products">Products</a>
+            <a href="/customers">Customers</a> | <a href="/orders">Orders</a> | <a href="/stores">Stores</a>
+            | <a href="/products">Products</a>
         </nav>
         <hr />
-
         <h2>Products</h2>
 
         <div>
@@ -153,11 +151,16 @@
                 <fieldset>
                     <legend>Delete Product</legend>
                     <p>Warning: The following action cannot be undone.</p>
-                    <label>Product ID</label>
-                    <input value="1" disabled />
-                    <br />
-                    <label>Product Description</label>
-                    <input value="PlayStation 5" disabled />
+                    <fieldset>
+                        <legend>Product Details</legend>
+                        <label>Product ID</label>
+                        <input value="1" disabled />
+                        <br />
+                        <label>Product Description</label>
+                        <input value="PlayStation 5" disabled />
+                        <input value="Console" disabled />
+                        <input value="New" disabled />
+                    </fieldset>
                 </fieldset>
                 <input type="submit" value="Delete" />
                 <input type="button" value="Cancel" />
