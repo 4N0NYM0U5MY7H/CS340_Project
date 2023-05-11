@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="description" content="Hero Electronics Database (Draft)" />
+        <meta name="author" content="Dania Magana & August Frisk" />
+        <title>Hero Electronics: Orders</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+
+        <header>
+            <h1>Hero Electronics</h1>
+        </header>
+        <hr />
+        <nav>
+            <a href="customers.html">Customers</a> | <a href="orders.html">Orders</a> | <a href="stores.html">Stores</a>
+            | <a href="products">Products</a>
+        </nav>
+        <hr />
+        <h2>Orders</h2>
+
+        <div>
+            <table>
+                <caption>Orders</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Customer ID</th>
+                        <th>Store ID</th>
+                        <th>Price</th>
+                        <th>Sales Tax</th>
+                        <th>Total</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2023-05-01</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>$ 499.99</td>
+                        <td>0 %</td>
+                        <td>$ 499.99</td>
+                        <td><i class="fa-solid fa-pen-to-square"></i></td>
+                        <td><i class="fa-solid fa-trash"></i></i></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2023-04-28</td>
+                        <td>4</td>
+                        <td>2</td>
+                        <td>$ 25.98</td>
+                        <td>5.75 %</td>
+                        <td>$ 27.47</td>
+                        <td><i class="fa-solid fa-pen-to-square"></i></td>
+                        <td><i class="fa-solid fa-trash"></i></i></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>2023-04-27</td>
+                        <td>4</td>
+                        <td>2</td>
+                        <td>$ 54.99</td>
+                        <td>5.75 %</td>
+                        <td>$ 58.15</td>
+                        <td><i class="fa-solid fa-pen-to-square"></i></td>
+                        <td><i class="fa-solid fa-trash"></i></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button>Add New</button>
+        </div>
+
+        <br />
+        <br />
+
+        <div>
+            <table>
+                <caption>Orders Details</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Order ID</th>
+                        <th>Product Description</th>
+                        <th>Quantity</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>PlayStation 5, Console, New</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>Five Nights at Freddy's Collectible Plush, Toy, Used</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Super Mario Odyssey, Video Game, New</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br />
+        <br />
+
+        <div>
+            <form method="POST">
+                <fieldset>
+                    <legend>Add New Order</legend>
+                    <label>Date</label>
+                    <input type="date" name="date" required />
+                    <br />
+                    <label>Customer ID</label>
+                    <select name="customer_id" required>
+                        <option value="1">1 | Ava Moreno | ava.moreno@example.com</option>
+                        <option value="2">2 | Oscar Mitchell | oscar.mitchell@example.com</option>
+                        <option value="3">3 | Daryl Caldwell | daryl.cadwell@example.com</option>
+                        <option value="4">4 | Lorraine Rogers | lorraine.rogers@example.com</option>
+                        <option value="5">5 | Ann Harris | ann.harris@example.com</option>
+                    </select>
+                    <br />
+                    <label>Store ID</label>
+                    <select name="store_id" required>
+                        <option value="1">
+                            1 | heroelectronics1@email.com | 5332 Walnut Hill Ln, Corvallis, Oregon
+                        </option>
+                        <option value="2">
+                            2 | heroelectronics2@email.com | 3798 Stevens Creek Rd, Corvallis, Oregon
+                        </option>
+                        <option value="3">
+                            3 | heroelectronics3@email.com | 3445 Robinson Rd, Iowa Park, Ohio
+                        </option>
+                        <option value="4">
+                            4 | heroelectronics4@email.com | 5623 Spring St, Iowa Park, Ohio
+                        </option>
+                        <option value="5">
+                            5 | heroelectronics5@email.com | 7322 W Campbell Ave, Abilene, Montana
+                        </option>
+                    </select>
+                    <br />
+                    <br />
+                    <fieldset>
+                        <legend>Order Items</legend>
+                        <label>Product ID</label>
+                        <select name="product_id" required>
+                            <option value="1">1 | PlayStation 5 | Console | New</option>
+                            <option value="2">2 | Five Nights at Freddy's Collectible Plush | Toy | Used</option>
+                            <option value="3">3 | Super Mario Odyssey | Video Game | New</option>
+                        </select>
+                        <br />
+                        <label>Quantity</label>
+                        <input type="number" name="quantity" required />
+                        <br />
+                        <input type="button" value="Add Item" />
+                    </fieldset>
+                    <br />
+                    <fieldset>
+                        <legend>Totals</legend>
+                        <label>Price</label>
+                        <input name="total_before_tax" title="SUM((product1 * quantity1), (product2 * quantity2),...)"
+                            value="SUM((product1 * quantity1), (product2 * quantity2),...)" disabled required />
+                        <br />
+                        <label>Sales Tax</label>
+                        <input name="sales_tax_id" title="Determined by Store ID" value="sales_tax_id" disabled
+                            required />
+                        <br />
+                        <label>Total</label>
+                        <input name="order_total" value="Price + Sales Tax" disabled required />
+                    </fieldset>
+                </fieldset>
+                <input type="submit" value="Add" />
+                <input type="button" value="Cancel" />
+            </form>
+        </div>
+
+        <br />
+        <br />
+
+        <div>
+            <form method="PUT">
+                <fieldset>
+                    <legend>Edit Order</legend>
+                    <label>Order ID</label>
+                    <input name="order_id" value="1" disabled required />
+                    <br />
+                    <label>Date</label>
+                    <input type="date" name="date" value="2023-05-01" required />
+                    <br />
+                    <label>Customer ID</label>
+                    <select name="customer_id" required>
+                        <option value="1" selected>1 | Ava Moreno | ava.moreno@example.com</option>
+                        <option value="2">2 | Oscar Mitchell | oscar.mitchell@example.com</option>
+                        <option value="3">3 | Daryl Caldwell | daryl.cadwell@example.com</option>
+                        <option value="4">4 | Lorraine Rogers | lorraine.rogers@example.com</option>
+                        <option value="5">5 | Ann Harris | ann.harris@example.com</option>
+                    </select>
+                    <br />
+                    <label>Store ID</label>
+                    <select name="store_id" required>
+                        <option value="1" selected>
+                            1 | heroelectronics1@email.com | 5332 Walnut Hill Ln, Corvallis, Oregon
+                        </option>
+                        <option value="2">
+                            2 | heroelectronics2@email.com | 3798 Stevens Creek Rd, Corvallis, Oregon
+                        </option>
+                        <option value="3">
+                            3 | heroelectronics3@email.com | 3445 Robinson Rd, Iowa Park, Ohio
+                        </option>
+                        <option value="4">
+                            4 | heroelectronics4@email.com | 5623 Spring St, Iowa Park, Ohio
+                        </option>
+                        <option value="5">
+                            5 | heroelectronics5@email.com | 7322 W Campbell Ave, Abilene, Montana
+                        </option>
+                    </select>
+                    <br />
+                    <fieldset>
+                        <legend>Order Items</legend>
+                        <label>Product ID</label>
+                        <select name="product_id" required>
+                            <option value="1" selected>1 | PlayStation 5 | Console | New</option>
+                            <option value="2">2 | Five Nights at Freddy's Collectible Plush | Toy | Used</option>
+                            <option value="3">3 | Super Mario Odyssey | Video Game | New</option>
+                        </select>
+                        <br />
+                        <label>Quantity</label>
+                        <input type="number" name="quantity" value="1" required />
+                        <br />
+                        <input type="button" value="Add Item" />
+                    </fieldset>
+                    <br />
+                    <fieldset>
+                        <legend>Totals</legend>
+                        <label>Price</label>
+                        <input name="total_before_tax" title="SUM((product1 * quantity1), (product2 * quantity2),...)"
+                            value="499.99" disabled required />
+                        <br />
+                        <label>Sales Tax</label>
+                        <input name="sales_tax_id" title="Determined by Store ID" value="0" disabled required />
+                        <br />
+                        <label>Total</label>
+                        <input name="order_total" value="499.99" disabled required />
+                    </fieldset>
+                </fieldset>
+                <input type="submit" value="Save" />
+                <input type="button" value="Cancel" />
+            </form>
+        </div>
+
+        <br />
+        <br />
+
+        <div>
+            <form method="DELETE">
+                <fieldset>
+                    <legend>Delete Order</legend>
+                    <p>Warning: The following action cannot be undone.</p>
+                    <fieldset>
+                        <legend>Order Details</legend>
+                        <label>Order ID</label>
+                        <input value="1" disabled />
+                        <br />
+                        <fieldset>
+                            <legend>Customer Details</legend>
+                            <label>Customer Name</label>
+                            <input value="Ava Moreno" disabled />
+                            <br />
+                            <label>Customer Email</label>
+                            <input value="ava.moreno@example.com" disabled />
+                        </fieldset>
+                        <br />
+                        <fieldset>
+                            <legend>Store Details</legend>
+                            <label>Store Email</label>
+                            <input value="heroelectronics1@email.com" disabled />
+                            <br />
+                            <label>Store Address</label>
+                            <input value="5332 Walnut Hill Ln, Corvallis, Oregon" disabled />
+                        </fieldset>
+                        <br />
+                        <fieldset>
+                            <legend>Order Items</legend>
+                            <label>Product</label>
+                            <input value="PlayStation 5, Console, New" disabled />
+                            <label>Quantity</label>
+                            <input value="1" disabled />
+                        </fieldset>
+                    </fieldset>
+                </fieldset>
+                <input type="submit" value="Delete" />
+                <input type="button" value="Cancel" />
+            </form>
+        </div>
+
+        <footer>
+            <div align="center">
+                <p>&copy; 2023 Dania Magana &amp; August Frisk.
+                    <br />
+                    Customer &amp; Store data generated with <a href="https://randomuser.me/">Random User Generator</a>.
+                </p>
+            </div>
+        </footer>
+    </body>
+
+</html>
