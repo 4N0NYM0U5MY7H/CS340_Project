@@ -19,8 +19,8 @@
         </header>
         <hr />
         <nav>
-            <a href="/customers">Customers</a> | <a href="/orders">Orders</a> | <a href="/stores">Stores</a>
-            | <a href="/products">Products</a>
+            <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="stores">Stores</a> | <a
+                href="stores-products">Store Products</a> | <a href="orders">Orders</a>
         </nav>
         <hr />
         <h2>Orders</h2>
@@ -34,10 +34,6 @@
                         <th>Date</th>
                         <th>Customer ID</th>
                         <th>Store ID</th>
-                        <th>Price</th>
-                        <th>Sales Tax</th>
-                        <th>Total</th>
-                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -46,33 +42,21 @@
                         <td>1</td>
                         <td>2023-05-01</td>
                         <td>2</td>
-                        <td>3</td>
-                        <td>$ 499.99</td>
-                        <td>0 %</td>
-                        <td>$ 499.99</td>
-                        <td><i class="fa-solid fa-pen-to-square"></i></td>
+                        <td>Store #56</td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>2023-04-28</td>
                         <td>4</td>
-                        <td>2</td>
-                        <td>$ 25.98</td>
-                        <td>5.75 %</td>
-                        <td>$ 27.47</td>
-                        <td><i class="fa-solid fa-pen-to-square"></i></td>
+                        <td>Store #82</td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>2023-04-27</td>
                         <td>4</td>
-                        <td>2</td>
-                        <td>$ 54.99</td>
-                        <td>5.75 %</td>
-                        <td>$ 58.15</td>
-                        <td><i class="fa-solid fa-pen-to-square"></i></td>
+                        <td>Store #17</td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
                 </tbody>
@@ -90,29 +74,32 @@
                     <tr>
                         <th>ID</th>
                         <th>Order ID</th>
-                        <th>Product Description</th>
+                        <th>Product ID</th>
                         <th>Quantity</th>
-
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
                         <td>1</td>
-                        <td>PlayStation 5, Console, New</td>
+                        <td>PlayStation 5</td>
                         <td>1</td>
+                        <td>499.99</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>2</td>
-                        <td>Five Nights at Freddy's Collectible Plush, Toy, Used</td>
+                        <td>Five Nights at Freddy's Collectible Plush</td>
                         <td>2</td>
+                        <td>25.98</td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>3</td>
-                        <td>Super Mario Odyssey, Video Game, New</td>
+                        <td>Super Mario Odyssey</td>
                         <td>1</td>
+                        <td>54.99</td>
                     </tr>
                 </tbody>
             </table>
@@ -126,44 +113,33 @@
                 <fieldset>
                     <legend>Add New Order</legend>
                     <label>Date</label>
-                    <input type="date" name="date" required />
+                    <input type="date" name="order_date" required />
                     <br />
                     <label>Customer</label>
                     <select name="customer_id" required>
-                        <option value="1">1 | Ava Moreno | ava.moreno@example.com | (562) 201-9464</option>
-                        <option value="2">2 | Oscar Mitchell | oscar.mitchell@example.com | (555) 330-8216</option>
-                        <option value="3">3 | Daryl Caldwell | daryl.cadwell@example.com | (317) 476-7082</option>
-                        <option value="4">4 | Lorraine Rogers | lorraine.rogers@example.com | (967) 508-1735</option>
-                        <option value="5">5 | Ann Harris | ann.harris@example.com | (246) 350-0973</option>
+                        <option value="1">1 | Ava Moreno | (562) 201-9464 | ava.moreno@example.com</option>
+                        <option value="2">2 | Oscar Mitchell | (555) 330-8216 | oscar.mitchell@example.com</option>
+                        <option value="3">3 | Daryl Caldwell | (317) 476-7082 | daryl.cadwell@example.com</option>
+                        <option value="4">4 | Lorraine Rogers | (967) 508-1735 | lorraine.rogers@example.com</option>
+                        <option value="5">5 | Ann Harris | (246) 350-0973 | ann.harris@example.com</option>
                     </select>
                     <br />
                     <label>Store</label>
                     <select name="store_id" required>
-                        <option value="1">
-                            1 | heroelectronics1@email.com | 5332 Walnut Hill Ln, Corvallis, Oregon 97333
-                        </option>
-                        <option value="2">
-                            2 | heroelectronics2@email.com | 3798 Stevens Creek Rd, Corvallis, Oregon 97333
-                        </option>
-                        <option value="3">
-                            3 | heroelectronics3@email.com | 3445 Robinson Rd, Iowa Park, Ohio 39628
-                        </option>
-                        <option value="4">
-                            4 | heroelectronics4@email.com | 5623 Spring St, Iowa Park, Ohio 39628
-                        </option>
-                        <option value="5">
-                            5 | heroelectronics5@email.com | 7322 W Campbell Ave, Abilene, Montana 64563
-                        </option>
+                        <option value="1">1 | #1 | (268) 432-6210 | heroelectronics1@email.com</option>
+                        <option value="2">2 | #17 | (679) 700-6746 | heroelectronics2@email.com</option>
+                        <option value="3">3 | #56 | (983) 821-8911 | heroelectronics3@email.com</option>
+                        <option value="4">4 | #82 | (385) 458-6153 | heroelectronics4@email.com</option>
+                        <option value="5">5 | #100 | (642) 936-9797 | heroelectronics5@email.com</option>
                     </select>
-                    <br />
                     <br />
                     <fieldset>
                         <legend>Order Items</legend>
                         <label>Product</label>
                         <select name="product_id" required>
-                            <option value="1">1 | PlayStation 5 | Console | New</option>
-                            <option value="2">2 | Five Nights at Freddy's Collectible Plush | Toy | Used</option>
-                            <option value="3">3 | Super Mario Odyssey | Video Game | New</option>
+                            <option value="1">1 | PlayStation 5 | 499.99</option>
+                            <option value="2">2 | Five Nights at Freddy's Collectible Plush | 12.99</option>
+                            <option value="3">3 | Super Mario Odyssey | 54.99</option>
                         </select>
                         <br />
                         <label>Quantity</label>
@@ -172,102 +148,10 @@
                         <input type="button" value="Add Item" />
                     </fieldset>
                     <br />
-                    <fieldset>
-                        <legend>Totals</legend>
-                        <label>Price</label>
-                        <input name="total_before_tax" title="SUM((product1 * quantity1), (product2 * quantity2),...)"
-                            value="SUM((product1 * quantity1), (product2 * quantity2),...)" disabled required />
-                        <br />
-                        <label>Sales Tax</label>
-                        <select name="sales_tax_id" required>
-                            <option value="1">Oregon | 0 %</option>
-                            <option value="2">Ohio | 5.75 %</option>
-                            <option value="3">Montana | 4.1 %</option>
-                        </select>
-                        <br />
-                        <label>Total</label>
-                        <input name="order_total" value="Price + Sales Tax" disabled required />
-                    </fieldset>
+                    <label>Total</label>
+                    <input name="order_total" value="Products.price" disabled required />
                 </fieldset>
                 <input type="submit" value="Add" />
-                <input type="button" value="Cancel" />
-            </form>
-        </div>
-
-        <br />
-        <br />
-
-        <div>
-            <form method="PUT">
-                <fieldset>
-                    <legend>Edit Order</legend>
-                    <label>Order ID</label>
-                    <input name="order_id" value="1" disabled required />
-                    <br />
-                    <label>Date</label>
-                    <input type="date" name="date" value="2023-05-01" required />
-                    <br />
-                    <label>Customer</label>
-                    <select name="customer_id" required>
-                        <option value="1" selected>1 | Ava Moreno | ava.moreno@example.com | (562) 201-9464</option>
-                        <option value="2">2 | Oscar Mitchell | oscar.mitchell@example.com | (555) 330-8216</option>
-                        <option value="3">3 | Daryl Caldwell | daryl.cadwell@example.com | (317) 476-7082</option>
-                        <option value="4">4 | Lorraine Rogers | lorraine.rogers@example.com | (967) 508-1735</option>
-                        <option value="5">5 | Ann Harris | ann.harris@example.com | (246) 350-0973</option>
-                    </select>
-                    <br />
-                    <label>Store</label>
-                    <select name="store_id" required>
-                        <option value="1" selected>
-                            1 | heroelectronics1@email.com | 5332 Walnut Hill Ln, Corvallis, Oregon 97333
-                        </option>
-                        <option value="2">
-                            2 | heroelectronics2@email.com | 3798 Stevens Creek Rd, Corvallis, Oregon 97333
-                        </option>
-                        <option value="3">
-                            3 | heroelectronics3@email.com | 3445 Robinson Rd, Iowa Park, Ohio 39628
-                        </option>
-                        <option value="4">
-                            4 | heroelectronics4@email.com | 5623 Spring St, Iowa Park, Ohio 39628
-                        </option>
-                        <option value="5">
-                            5 | heroelectronics5@email.com | 7322 W Campbell Ave, Abilene, Montana 64563
-                        </option>
-                    </select>
-                    <br />
-                    <fieldset>
-                        <legend>Order Items</legend>
-                        <label>Product ID</label>
-                        <select name="product_id" required>
-                            <option value="1" selected>1 | PlayStation 5 | Console | New</option>
-                            <option value="2">2 | Five Nights at Freddy's Collectible Plush | Toy | Used</option>
-                            <option value="3">3 | Super Mario Odyssey | Video Game | New</option>
-                        </select>
-                        <br />
-                        <label>Quantity</label>
-                        <input type="number" name="quantity" value="1" required />
-                        <br />
-                        <input type="button" value="Add Item" />
-                    </fieldset>
-                    <br />
-                    <fieldset>
-                        <legend>Totals</legend>
-                        <label>Price</label>
-                        <input name="total_before_tax" title="SUM((product1 * quantity1), (product2 * quantity2),...)"
-                            value="499.99" disabled required />
-                        <br />
-                        <label>Sales Tax</label>
-                        <select name="sales_tax_id" required>
-                            <option value="1" selected>Oregon | 0 %</option>
-                            <option value="2">Ohio | 5.75 %</option>
-                            <option value="3">Montana | 4.1 %</option>
-                        </select>
-                        <br />
-                        <label>Total</label>
-                        <input name="order_total" value="499.99" disabled required />
-                    </fieldset>
-                </fieldset>
-                <input type="submit" value="Save" />
                 <input type="button" value="Cancel" />
             </form>
         </div>
@@ -282,34 +166,35 @@
                     <p>Warning: The following action cannot be undone.</p>
                     <fieldset>
                         <legend>Order Details</legend>
-                        <label>Order ID</label>
-                        <input value="1" disabled />
+                        <label>ID</label>
+                        <input name="order_id" value="1" disabled />
                         <br />
-                        <fieldset>
-                            <legend>Customer Details</legend>
-                            <label>Customer Name</label>
-                            <input value="Ava Moreno" disabled />
-                            <br />
-                            <label>Customer Email</label>
-                            <input value="ava.moreno@example.com" disabled />
-                        </fieldset>
+                        <label>Date</label>
+                        <input type="date" name="order_date" value="2023-05-01" disabled />
                         <br />
-                        <fieldset>
-                            <legend>Store Details</legend>
-                            <label>Store Email</label>
-                            <input value="heroelectronics1@email.com" disabled />
-                            <br />
-                            <label>Store Address</label>
-                            <input value="5332 Walnut Hill Ln, Corvallis, Oregon" disabled />
-                        </fieldset>
+                        <label>Customer</label>
+                        <select name="customer_id" disabled>
+                            <option value="2" selected>2 | Oscar Mitchell | (555) 330-8216 | oscar.mitchell@example.com
+                            </option>
+                        </select>
                         <br />
+                        <label>Store</label>
+                        <select name="store_id" disabled>
+                            <option value="3" selected>3 | #56 | (983) 821-8911 | heroelectronics3@email.com</option>
+                        </select>
                         <fieldset>
                             <legend>Order Items</legend>
                             <label>Product</label>
-                            <input value="PlayStation 5, Console, New" disabled />
+                            <select name="product_id" disabled>
+                                <option value="1" selected>1 | PlayStation 5 | 499.99</option>
+                            </select>
+                            <br />
                             <label>Quantity</label>
-                            <input value="1" disabled />
+                            <input name="quantity" value="1" disabled />
                         </fieldset>
+                        <br />
+                        <label>Total</label>
+                        <input name="order_total" value="499.99" disabled />
                     </fieldset>
                 </fieldset>
                 <input type="submit" value="Delete" />
