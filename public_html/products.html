@@ -19,8 +19,8 @@
         </header>
         <hr />
         <nav>
-            <a href="/customers">Customers</a> | <a href="/orders">Orders</a> | <a href="/stores">Stores</a>
-            | <a href="/products">Products</a>
+            <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="stores">Stores</a>
+            | <a href="orders">Orders</a>
         </nav>
         <hr />
         <h2>Products</h2>
@@ -31,9 +31,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Description</th>
-                        <th>Type</th>
                         <th>Price</th>
-                        <th>Condition</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -42,27 +40,21 @@
                     <tr>
                         <td>1</td>
                         <td>PlayStation 5</td>
-                        <td>Console</td>
                         <td>$ 499.99</td>
-                        <td>New</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Five Nights at Freddy's Collectible Plush</td>
-                        <td>Toy</td>
                         <td>$ 12.99</td>
-                        <td>Used</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>Super Mario Odyssey</td>
-                        <td>Video Game</td>
                         <td>$ 54.99</td>
-                        <td>New</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
@@ -81,24 +73,8 @@
                     <label>Description</label>
                     <input type="text" name="product_description" required />
                     <br />
-                    <label>Type</label>
-                    <select name="product_type" required>
-                        <option>&nbsp;</option>
-                        <option value="Console">Console</option>
-                        <option value="Video Game">Video Game</option>
-                        <option value="Toy">Toy</option>
-                        <option value="Board Game">Board Game</option>
-                        <option value="Apparel">Apparel</option>
-                    </select>
-                    <br />
                     <label>Price</label>
                     <input type="text" name="product_price" required />
-                    <br />
-                    <fieldset>
-                        <legend>Product Condition</legend>
-                        <label><input type="radio" name="product_condition" value="New" required />New</label>
-                        <label><input type="radio" name="product_condition" value="Used" />Used</label>
-                    </fieldset>
                 </fieldset>
                 <input type="submit" value="Add" />
                 <input type="button" value="Cancel" />
@@ -112,30 +88,14 @@
             <form method="PUT">
                 <fieldset>
                     <legend>Edit Product</legend>
-                    <label>Product ID</label>
+                    <label>ID</label>
                     <input value="1" disabled />
                     <br />
                     <label>Description</label>
                     <input type="text" name="product_description" value="PlayStation 5" required />
                     <br />
-                    <label>Type</label>
-                    <select name="product_type" required>
-                        <option>&nbsp;</option>
-                        <option value="Console" selected>Console</option>
-                        <option value="Video Game">Video Game</option>
-                        <option value="Toy">Toy</option>
-                        <option value="Board Game">Board Game</option>
-                        <option value="Apparel">Apparel</option>
-                    </select>
-                    <br />
                     <label>Price</label>
                     <input type="text" name="product_price" value="499.99" required />
-                    <br />
-                    <fieldset>
-                        <legend>Product Condition</legend>
-                        <label><input type="radio" name="product_condition" value="New" checked required />New</label>
-                        <label><input type="radio" name="product_condition" value="Used" />Used</label>
-                    </fieldset>
                 </fieldset>
                 <input type="submit" value="Save" />
                 <input type="button" value="Cancel" />
@@ -153,12 +113,13 @@
                     <fieldset>
                         <legend>Product Details</legend>
                         <label>Product ID</label>
-                        <input value="1" disabled />
+                        <input name="product_id" value="1" disabled />
                         <br />
                         <label>Product Description</label>
-                        <input value="PlayStation 5" disabled />
-                        <input value="Console" disabled />
-                        <input value="New" disabled />
+                        <input name="product_description" value="PlayStation 5" disabled />
+                        <br />
+                        <label>Price</label>
+                        <input name="product_price" value="499.99" disabled />
                     </fieldset>
                 </fieldset>
                 <input type="submit" value="Delete" />
