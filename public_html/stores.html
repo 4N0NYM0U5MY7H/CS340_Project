@@ -19,21 +19,20 @@
         </header>
         <hr />
         <nav>
-            <a href="/customers">Customers</a> | <a href="/orders">Orders</a> | <a href="/stores">Stores</a>
-            | <a href="/products">Products</a>
+            <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="stores">Stores</a> | <a
+                href="stores-products">Store Products</a> | <a href="orders">Orders</a>
         </nav>
         <hr />
         <h2>Stores</h2>
 
         <div>
             <table>
-                <caption>Stores</caption>
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Store Number</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Address</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -41,41 +40,41 @@
                 <tbody>
                     <tr>
                         <td>1</td>
+                        <td>1</td>
                         <td>(268) 432-6210</td>
                         <td>heroelectronics1@email.com</td>
-                        <td>5332 Walnut Hill Ln, Corvallis, Oregon 97333</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
                     <tr>
                         <td>2</td>
+                        <td>17</td>
                         <td>(679) 700-6746</td>
                         <td>heroelectronics2@email.com</td>
-                        <td>3798 Stevens Creek Rd, Corvallis, Oregon 97333</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
                     <tr>
                         <td>3</td>
+                        <td>56</td>
                         <td>(983) 821-8911</td>
                         <td>heroelectronics3@email.com</td>
-                        <td>3445 Robinson Rd, Iowa Park, Ohio 39628</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
                     <tr>
                         <td>4</td>
+                        <td>82</td>
                         <td>(385) 458-6153</td>
                         <td>heroelectronics4@email.com</td>
-                        <td>5623 Spring St, Iowa Park, Ohio 39628</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
                     <tr>
                         <td>5</td>
+                        <td>100</td>
                         <td>(642) 936-9797</td>
                         <td>heroelectronics5@email.com</td>
-                        <td>7322 W Campbell Ave, Abilene, Montana 64563</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
                         <td><i class="fa-solid fa-trash"></i></i></td>
                     </tr>
@@ -88,67 +87,18 @@
         <br />
 
         <div>
-            <table>
-                <caption>Store Products</caption>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Store ID</th>
-                        <th>Product Description</th>
-                        <th>In Stock</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>PlayStation 5, Console, New</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>Five Nights at Freddy's Collectible Plush, Toy, Used</td>
-                        <td>11</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>2</td>
-                        <td>Super Mario Odyssey, Video Game, New</td>
-                        <td>10</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <br />
-        <br />
-
-        <div>
             <form method="POST">
                 <fieldset>
                     <legend>Add New Store</legend>
+                    <label>Store Number</label>
+                    <input type="number" name="store_number" placeholder="999" required />
+                    <br />
                     <label>Phone Number</label>
                     <input type="tel" name="store_phone" placeholder="(555) 123-4567" required />
                     <br />
                     <label>Email</label>
                     <input type="email" name="store_email" placeholder="something@example.com" required />
                     <br />
-                    <fieldset>
-                        <legend>Store Address</legend>
-                        <label>Address</label>
-                        <input type="text" name="street_address" placeholder="123 Main St" required />
-                        <br />
-                        <label>City</label>
-                        <input type="text" name="city" placeholder="Gotham" required />
-                        <br />
-                        <label>State</label>
-                        <input type="text" name="state" placeholder="Oregon" required />
-                        <br />
-                        <label>Zip Code</label>
-                        <input type="text" name="zip_code" placeholder="12345" required />
-                    </fieldset>
                 </fieldset>
                 <input type="submit" value="Add" />
                 <input type="button" value="Cancel" />
@@ -162,29 +112,17 @@
             <form method="PUT">
                 <fieldset>
                     <legend>Edit Store</legend>
-                    <label>Store ID</label>
-                    <input value="1" disabled />
+                    <label>ID</label>
+                    <input name="store_id" value="1" disabled />
+                    <br />
+                    <label>Store Number</label>
+                    <input type="number" name="store_number" value="1" required />
                     <br />
                     <label>Phone Number</label>
                     <input type="tel" name="store_phone" value="(268) 432-6210" required />
                     <br />
                     <label>Email</label>
                     <input type="email" name="store_email" value="heroelectronics1@email.com" required />
-                    <br />
-                    <fieldset>
-                        <legend>Store Address</legend>
-                        <label>Address</label>
-                        <input type="text" name="street_address" value="5332 Walnut Hill Ln" required />
-                        <br />
-                        <label>City</label>
-                        <input type="text" name="city" value="Corvallis" required />
-                        <br />
-                        <label>State</label>
-                        <input type="text" name="state" value="Oregon" required />
-                        <br />
-                        <label>Zip Code</label>
-                        <input type="text" name="zip_code" value="97333" required />
-                    </fieldset>
                 </fieldset>
                 <input type="submit" value="Save" />
                 <input type="button" value="Cancel" />
@@ -201,13 +139,17 @@
                     <p>Warning: The following action cannot be undone.</p>
                     <fieldset>
                         <legend>Store Details</legend>
-                        <label>Store ID</label>
-                        <input value="1" disabled />
+                        <label>ID</label>
+                        <input name="store_id" value="1" disabled />
                         <br />
-                        <label>Store Address</label>
-                        <input name="address" value="5332 Walnut Hill Ln" disabled />
-                        <input name="city" value="Corvallis" disabled />
-                        <input name="state" value="Oregon" disabled />
+                        <label>Store Number</label>
+                        <input name="store_number" value="1" disabled />
+                        <br />
+                        <label>Phone Number</label>
+                        <input name="store_phone" value="(268) 432-6210" disabled />
+                        <br />
+                        <label>Email</label>
+                        <input name="store_email" value="heroelectronics1@email.com" disabled />
                     </fieldset>
                 </fieldset>
                 <input type="submit" value="Delete" />

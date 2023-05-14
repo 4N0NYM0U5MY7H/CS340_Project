@@ -19,8 +19,8 @@
         </header>
         <hr />
         <nav>
-            <a href="/customers">Customers</a> | <a href="/orders">Orders</a> | <a href="/stores">Stores</a>
-            | <a href="/products">Products</a>
+            <a href="customers">Customers</a> | <a href="products">Products</a> | <a href="stores">Stores</a> | <a
+                href="stores-products">Store Products</a> | <a href="orders">Orders</a>
         </nav>
         <hr />
         <h2>Customers</h2>
@@ -111,7 +111,7 @@
             <form method="PUT">
                 <fieldset>
                     <legend>Edit Customer</legend>
-                    <label>Customer ID</label>
+                    <label>ID</label>
                     <input value="1" disabled />
                     <br />
                     <label>Name</label>
@@ -138,14 +138,17 @@
                     <p>Warning: The following action cannot be undone.</p>
                     <fieldset>
                         <legend>Customer Details</legend>
-                        <label>Customer ID</label>
-                        <input value="1" disabled />
+                        <label>ID</label>
+                        <input name="customer_id" value="1" disabled />
                         <br />
-                        <label>Customer Name</label>
-                        <input value="Ava Moreno" disabled />
+                        <label>Name</label>
+                        <input name="customer_name" value="Ava Moreno" disabled />
                         <br />
-                        <label>Customer Email</label>
-                        <input value="ava.moreno@example.com" disabled />
+                        <label>Phone Number</label>
+                        <input name="customer_phone" value="(562) 201-9464" disabled />
+                        <br />
+                        <label>Email</label>
+                        <input name="customer_email" value="ava.moreno@example.com" disabled />
                     </fieldset>
                 </fieldset>
                 <input type="submit" value="Delete" />
