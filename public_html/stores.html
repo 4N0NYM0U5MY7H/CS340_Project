@@ -10,6 +10,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+            td {
+                padding: 0 10px;
+                text-align: center;
+            }
+            th {
+                padding: 0 15px;
+            }
+        </style>
     </head>
 
     <body>
@@ -23,6 +32,7 @@
                 href="stores-products">Store Products</a> | <a href="orders">Orders</a>
         </nav>
         <hr />
+        
         <h2>Stores</h2>
 
         <div>
@@ -33,7 +43,7 @@
                         <th>Store Number</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Edit</th>
+                        <th>Update</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -44,7 +54,7 @@
                         <td>(268) 432-6210</td>
                         <td>heroelectronics1@email.com</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>2</td>
@@ -52,7 +62,7 @@
                         <td>(679) 700-6746</td>
                         <td>heroelectronics2@email.com</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -60,7 +70,7 @@
                         <td>(983) 821-8911</td>
                         <td>heroelectronics3@email.com</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>4</td>
@@ -68,7 +78,7 @@
                         <td>(385) 458-6153</td>
                         <td>heroelectronics4@email.com</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>5</td>
@@ -76,12 +86,17 @@
                         <td>(642) 936-9797</td>
                         <td>heroelectronics5@email.com</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                 </tbody>
             </table>
-            <button>Add New</button>
+            <button>Add New Store</button>
         </div>
+
+        <br />
+        <br />
+
+        *** Only Displayed When Button Pushed ***
 
         <br />
         <br />
@@ -111,7 +126,7 @@
         <div>
             <form method="PUT">
                 <fieldset>
-                    <legend>Edit Store</legend>
+                    <legend>Update Store</legend>
                     <label>ID</label>
                     <input name="store_id" value="1" disabled />
                     <br />
@@ -138,7 +153,7 @@
                     <legend>Delete Store</legend>
                     <p>Warning: The following action cannot be undone.</p>
                     <fieldset>
-                        <legend>Store Details</legend>
+                        <legend>Store Information</legend>
                         <label>ID</label>
                         <input name="store_id" value="1" disabled />
                         <br />
@@ -159,7 +174,7 @@
 
         <footer>
             <div align="center">
-                <p>&copy; 2023 Dania Magana &amp; August Frisk.
+                <p>&copy; 2023 August Frisk &amp; Dania Magana.
                     <br />
                     Store data generated with <a href="https://randomuser.me/">Random User Generator</a>.
                 </p>
