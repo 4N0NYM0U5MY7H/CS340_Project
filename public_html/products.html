@@ -10,6 +10,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+            td {
+                padding: 0 10px;
+                text-align: center;
+            }
+            th {
+                padding: 0 15px;
+            }
+        </style>
     </head>
 
     <body>
@@ -23,6 +32,7 @@
                 href="stores-products">Store Products</a> | <a href="orders">Orders</a>
         </nav>
         <hr />
+        
         <h2>Products</h2>
 
         <div>
@@ -32,7 +42,7 @@
                         <th>ID</th>
                         <th>Description</th>
                         <th>Price</th>
-                        <th>Edit</th>
+                        <th>Update</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -40,28 +50,33 @@
                     <tr>
                         <td>1</td>
                         <td>PlayStation 5</td>
-                        <td>$ 499.99</td>
+                        <td>499.99</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Five Nights at Freddy's Collectible Plush</td>
-                        <td>$ 12.99</td>
+                        <td>12.99</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>Super Mario Odyssey</td>
-                        <td>$ 54.99</td>
+                        <td>54.99</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                 </tbody>
             </table>
-            <button>Add New</button>
+            <button>Add New Product</button>
         </div>
+
+        <br />
+        <br />
+
+        *** Only Displayed When Button Pushed ***
 
         <br />
         <br />
@@ -71,10 +86,10 @@
                 <fieldset>
                     <legend>Add New Product</legend>
                     <label>Description</label>
-                    <input type="text" name="product_description" required />
+                    <input type="text" name="product_description" placeholder="name" required />
                     <br />
                     <label>Price</label>
-                    <input type="text" name="product_price" required />
+                    <input type="text" name="product_price" placeholder="0.00" required />
                 </fieldset>
                 <input type="submit" value="Add" />
                 <input type="button" value="Cancel" />
@@ -87,9 +102,9 @@
         <div>
             <form method="PUT">
                 <fieldset>
-                    <legend>Edit Product</legend>
+                    <legend>Update Product</legend>
                     <label>ID</label>
-                    <input value="1" disabled />
+                    <input name="product_id" value="1" disabled />
                     <br />
                     <label>Description</label>
                     <input type="text" name="product_description" value="PlayStation 5" required />
@@ -111,11 +126,11 @@
                     <legend>Delete Product</legend>
                     <p>Warning: The following action cannot be undone.</p>
                     <fieldset>
-                        <legend>Product Details</legend>
-                        <label>Product ID</label>
+                        <legend>Product Information</legend>
+                        <label>ID</label>
                         <input name="product_id" value="1" disabled />
                         <br />
-                        <label>Product Description</label>
+                        <label>Description</label>
                         <input name="product_description" value="PlayStation 5" disabled />
                         <br />
                         <label>Price</label>
@@ -129,7 +144,7 @@
 
         <footer>
             <div align="center">
-                <p>&copy; 2023 Dania Magana &amp; August Frisk.</p>
+                <p>&copy; 2023 August Frisk &amp; Dania Magana.</p>
             </div>
         </footer>
     </body>
