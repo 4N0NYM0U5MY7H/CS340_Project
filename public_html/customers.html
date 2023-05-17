@@ -10,6 +10,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+            td {
+                padding: 0 10px;
+                text-align: center;
+            }
+            th {
+                padding: 0 15px;
+            }
+        </style>
     </head>
 
     <body>
@@ -23,7 +32,21 @@
                 href="stores-products">Store Products</a> | <a href="orders">Orders</a>
         </nav>
         <hr />
+        
         <h2>Customers</h2>
+
+        <div>
+            <form method="POST">
+                <fieldset>
+                    <legend>Search for a Customer</legend>
+                    <input type="search" name="customer_search" placeholder="name/phone/email"/>
+                    <input type="submit" value="Search" />
+                    </fieldset>
+            </form>
+        </div>
+
+        <br />
+        <br />
 
         <div>
             <table>
@@ -33,7 +56,7 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Edit</th>
+                        <th>Update</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -44,7 +67,7 @@
                         <td>(562) 201-9464</td>
                         <td>ava.moreno@example.com</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>2</td>
@@ -52,7 +75,7 @@
                         <td>(555) 330-8216</td>
                         <td>oscar.mitchell@example.com</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -60,7 +83,7 @@
                         <td>(317) 476-7082</td>
                         <td>daryl.caldwell@example.com</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>4</td>
@@ -68,7 +91,7 @@
                         <td>(967) 508-1735</td>
                         <td>lorraine.rogers@example.com</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>5</td>
@@ -76,12 +99,17 @@
                         <td>(246) 350-0973</td>
                         <td>ann.harris@example.com</td>
                         <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                 </tbody>
             </table>
-            <button>Add New</button>
+            <button>Add New Customer</button>
         </div>
+
+        <br />
+        <br />
+
+        *** Only Displayed When Button Pushed ***
 
         <br />
         <br />
@@ -91,7 +119,7 @@
                 <fieldset>
                     <legend>Add New Cusotmer</legend>
                     <label>Name</label>
-                    <input type="text" name="customer_name" placeholder="first last" required />
+                    <input type="text" name="customer_name" placeholder="First Last" required />
                     <br />
                     <label>Phone Number</label>
                     <input type="tel" name="customer_phone" placeholder="(555) 123-4567" required />
@@ -110,9 +138,9 @@
         <div>
             <form method="PUT">
                 <fieldset>
-                    <legend>Edit Customer</legend>
+                    <legend>Update Customer</legend>
                     <label>ID</label>
-                    <input value="1" disabled />
+                    <input name="customer_id" value="1" disabled />
                     <br />
                     <label>Name</label>
                     <input type="text" name="customer_name" value="Ava Moreno" required />
@@ -137,7 +165,7 @@
                     <legend>Delete Customer</legend>
                     <p>Warning: The following action cannot be undone.</p>
                     <fieldset>
-                        <legend>Customer Details</legend>
+                        <legend>Customer Information</legend>
                         <label>ID</label>
                         <input name="customer_id" value="1" disabled />
                         <br />
@@ -158,7 +186,7 @@
 
         <footer>
             <div align="center">
-                <p>&copy; 2023 Dania Magana &amp; August Frisk.
+                <p>&copy; 2023 August Frisk &amp; Dania Magana.
                     <br />
                     Customer data generated with <a href="https://randomuser.me/">Random User Generator</a>.
                 </p>
