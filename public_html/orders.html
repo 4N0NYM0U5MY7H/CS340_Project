@@ -10,6 +10,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+            td {
+                padding: 0 10px;
+                text-align: center;
+            }
+            th {
+                padding: 0 15px;
+            }
+        </style>
     </head>
 
     <body>
@@ -23,17 +32,18 @@
                 href="stores-products">Store Products</a> | <a href="orders">Orders</a>
         </nav>
         <hr />
+        
         <h2>Orders</h2>
 
         <div>
             <table>
-                <caption>Orders</caption>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Date</th>
-                        <th>Customer ID</th>
-                        <th>Store ID</th>
+                        <th>Customer</th>
+                        <th>Store Number</th>
+                        <th>Notes</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -41,42 +51,53 @@
                     <tr>
                         <td>1</td>
                         <td>2023-05-01</td>
-                        <td>2</td>
-                        <td>Store #56</td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td>Oscar Mitchell</td>
+                        <td>56</td>
+                        <td></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>2023-04-28</td>
-                        <td>4</td>
-                        <td>Store #82</td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td>Lorraine Rogers</td>
+                        <td>17</td>
+                        <td></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>2023-04-27</td>
+                        <td>Lorraine Rogers</td>
+                        <td>17</td>
+                        <td></td>
+                        <td><i class="fa-solid fa-trash"></i></td>
+                    </tr>
+                    <tr>
                         <td>4</td>
-                        <td>Store #17</td>
-                        <td><i class="fa-solid fa-trash"></i></i></td>
+                        <td>2023-01-15</td>
+                        <td>NULL</td>
+                        <td>100</td>
+                        <td>Store Transfer to Store Number 2</td>
+                        <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                 </tbody>
             </table>
-            <button>Add New</button>
+            <button>Add New Order</button>
         </div>
 
         <br />
-        <br />
+
+        <h2>Order Details</h2>
 
         <div>
             <table>
-                <caption>Order Details</caption>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Order ID</th>
-                        <th>Product ID</th>
+                        <th>Product</th>
                         <th>Quantity</th>
-                        <th>Total</th>
+                        <th>Line Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,7 +124,13 @@
                     </tr>
                 </tbody>
             </table>
+            <button>Add New Order Detail</button>
         </div>
+
+        <br />
+        <br />
+
+        *** Only Displayed When Button Pushed ***
 
         <br />
         <br />
@@ -116,41 +143,64 @@
                     <input type="date" name="order_date" required />
                     <br />
                     <label>Customer</label>
-                    <select name="customer_id" required>
-                        <option value="1">1 | Ava Moreno | (562) 201-9464 | ava.moreno@example.com</option>
-                        <option value="2">2 | Oscar Mitchell | (555) 330-8216 | oscar.mitchell@example.com</option>
-                        <option value="3">3 | Daryl Caldwell | (317) 476-7082 | daryl.cadwell@example.com</option>
-                        <option value="4">4 | Lorraine Rogers | (967) 508-1735 | lorraine.rogers@example.com</option>
-                        <option value="5">5 | Ann Harris | (246) 350-0973 | ann.harris@example.com</option>
+                    <select name="customer_name" required>
+                        <option value="" selected disabled hidden>Select Option</option>
+                        <option value="1">Ava Moreno</option>
+                        <option value="2">Oscar Mitchell</option>
+                        <option value="3">Daryl Caldwell</option>
+                        <option value="4">Lorraine Rogers</option>
+                        <option value="5">Ann Harris</option>
+                        <option value="6">NULL</option>
                     </select>
                     <br />
-                    <label>Store</label>
-                    <select name="store_id" required>
-                        <option></option>
-                        <option value="1">1 | #1 | (268) 432-6210 | heroelectronics1@email.com</option>
-                        <option value="2">2 | #17 | (679) 700-6746 | heroelectronics2@email.com</option>
-                        <option value="3">3 | #56 | (983) 821-8911 | heroelectronics3@email.com</option>
-                        <option value="4">4 | #82 | (385) 458-6153 | heroelectronics4@email.com</option>
-                        <option value="5">5 | #100 | (642) 936-9797 | heroelectronics5@email.com</option>
+                    <label>Store Number</label>
+                    <select name="store_number" required>
+                        <option value="" selected disabled hidden>Select Option</option>
+                        <option value="1">1</option>
+                        <option value="2">17</option>
+                        <option value="3">56</option>
+                        <option value="4">82</option>
+                        <option value="5">100</option>
                     </select>
                     <br />
-                    <fieldset>
-                        <legend>Order Items</legend>
-                        <label>Product</label>
-                        <select name="product_id" required>
-                            <option value="1">1 | PlayStation 5 | 499.99</option>
-                            <option value="2">2 | Five Nights at Freddy's Collectible Plush | 12.99</option>
-                            <option value="3">3 | Super Mario Odyssey | 54.99</option>
-                        </select>
-                        <br />
-                        <label>Quantity</label>
-                        <input type="number" name="quantity" required />
-                        <br />
-                        <input type="button" value="Add Item" />
-                    </fieldset>
+                    <label>Notes</label>
                     <br />
-                    <label>Total</label>
-                    <input name="order_total" value="Products.price" disabled required />
+                    <textarea name="order_notes"></textarea>
+                </fieldset>
+                <input type="submit" value="Add" />
+                <input type="button" value="Cancel" />
+            </form>
+        </div>
+
+        <br />
+        <br />
+
+        <div>
+            <form method="POST">
+                <fieldset>
+                    <legend>Add New Order Detail</legend>
+                    <label>Order ID</label>
+                    <select>
+                        <option value="" selected disabled hidden>Order ID | Date | Customer | Store Number</option>
+                        <option value="1">1 | 2023-05-01 | Oscar Mitchell | 56</option>
+                        <option value="2">2 | 2023-04-28 | Lorraine Rogers | 17</option>
+                        <option value="3">3 | 2023-04-27 | Lorraine Rogers | 17</option>
+                        <option value="4">4 | 2023-01-15 | NULL | 100</option>
+                    </select>
+                    <br />
+                    <label>Product</label>
+                    <select name="product_description" required>
+                        <option value="" selected disabled hidden>Select Option</option>
+                        <option value="1">PlayStation 5</option>
+                        <option value="2">Five Nights at Freddy's Collectible Plush</option>
+                        <option value="3">Super Mario Odyssey</option>
+                    </select>
+                    <br />
+                    <label>Quantity</label>
+                    <input type="number" name="order_quantity" value="1" required />
+                    <br />
+                    <label>Line Total</label>
+                <input name="line_total" value="0.00" disabled required />
                 </fieldset>
                 <input type="submit" value="Add" />
                 <input type="button" value="Cancel" />
@@ -166,7 +216,7 @@
                     <legend>Delete Order</legend>
                     <p>Warning: The following action cannot be undone.</p>
                     <fieldset>
-                        <legend>Order Details</legend>
+                        <legend>Order Information</legend>
                         <label>ID</label>
                         <input name="order_id" value="1" disabled />
                         <br />
@@ -174,28 +224,10 @@
                         <input type="date" name="order_date" value="2023-05-01" disabled />
                         <br />
                         <label>Customer</label>
-                        <select name="customer_id" disabled>
-                            <option value="2" selected>2 | Oscar Mitchell | (555) 330-8216 | oscar.mitchell@example.com
-                            </option>
-                        </select>
+                        <input name="customer_name" value="Oscar Mitchell" disabled>
                         <br />
-                        <label>Store</label>
-                        <select name="store_id" disabled>
-                            <option value="3" selected>3 | #56 | (983) 821-8911 | heroelectronics3@email.com</option>
-                        </select>
-                        <fieldset>
-                            <legend>Order Items</legend>
-                            <label>Product</label>
-                            <select name="product_id" disabled>
-                                <option value="1" selected>1 | PlayStation 5 | 499.99</option>
-                            </select>
-                            <br />
-                            <label>Quantity</label>
-                            <input name="quantity" value="1" disabled />
-                        </fieldset>
-                        <br />
-                        <label>Total</label>
-                        <input name="order_total" value="499.99" disabled />
+                        <label>Store Number</label>
+                        <input name="store_number" value="56" disabled>
                     </fieldset>
                 </fieldset>
                 <input type="submit" value="Delete" />
@@ -205,9 +237,9 @@
 
         <footer>
             <div align="center">
-                <p>&copy; 2023 Dania Magana &amp; August Frisk.
+                <p>&copy; 2023 August Frisk &amp; Dania Magana.
                     <br />
-                    Customer &amp; Store data generated with <a href="https://randomuser.me/">Random User Generator</a>.
+                    Customer data generated with <a href="https://randomuser.me/">Random User Generator</a>.
                 </p>
             </div>
         </footer>
