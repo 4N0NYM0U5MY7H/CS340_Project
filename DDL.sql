@@ -74,7 +74,7 @@ INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES
 ('2023-05-01', (SELECT customer_id FROM Customers WHERE customer_name = 'Oscar Mitchell'), (SELECT store_id FROM Stores WHERE store_number = '56'), DEFAULT),
 ('2023-04-28', (SELECT customer_id FROM Customers WHERE customer_name = 'Lorraine Rogers'), (SELECT store_id FROM Stores WHERE store_number = '17'), DEFAULT),
 ('2023-04-27', (SELECT customer_id FROM Customers WHERE customer_name = 'Lorraine Rogers'), (SELECT store_id FROM Stores WHERE store_number = '17'), DEFAULT),
-('2023-01-15', NULL, (SELECT store_id FROM Stores WHERE store_number = '100'), 'Store Transfer to Store Number 2');
+('2023-01-15', NULL, (SELECT store_id FROM Stores WHERE store_number = '100'), 'Store Transfer to Store Number 17');
 
 -- StoreProducts Table
 DROP TABLE IF EXISTS StoreProducts;
