@@ -14,6 +14,7 @@ app.config["MYSQL_PASSWORD"] = os.environ.get("MYSQL_PASSWORD")
 app.config["MYSQL_DB"] = os.environ.get("MYSQL_DB")
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
+PORT = os.environ.get("PORT")
 
 mysql = MySQL(app)
 
@@ -39,4 +40,4 @@ def root():
 # Listener
 if __name__ == "__main__":
     # Start the app on port 3000, it will be different once hosted
-    app.run(port=3000, debug=True)
+    app.run(port=PORT, debug=True)
