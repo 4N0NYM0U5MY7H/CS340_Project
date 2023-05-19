@@ -1,0 +1,22 @@
+# Add 'frontend' to any change within the public_html directory
+frontend:
+- public_html/*
+
+# Add 'backend' to any change relating to the flask app
+backend:
+- **/*.py
+- Pipfile
+- Pipfile.lock
+
+# Add 'dependencies' to any changes to the Pipfile and Pipfile.lock
+dependencies:
+- Pipfile
+- Pipfile.lock
+
+# Add 'database' to any changes to the DDL, DML, or other .sql files
+database:
+- **/*.sql
+
+# Add `documentation` to any changes to the README
+documentation:
+- README.md
