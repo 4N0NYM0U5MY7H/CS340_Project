@@ -34,7 +34,9 @@ CREATE TABLE Products (
 INSERT INTO Products (product_description, product_price) VALUES
 ('PlayStation 5', 499.99),
 ('Five Nights at Freddy''s Collectible Plush', 12.99),
-('Super Mario Odyssey', 54.99);
+('Super Mario Odyssey', 54.99),
+('Nintendo Switch - OLED Model', 349.99),
+('Elden Ring', 59.99);
 
 -- Stores Table
 DROP TABLE IF EXISTS Stores;
@@ -72,6 +74,7 @@ CREATE TABLE Orders (
 -- Example Data for Orders Table
 INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES
 ('2023-05-01', (SELECT customer_id FROM Customers WHERE customer_name = 'Oscar Mitchell'), (SELECT store_id FROM Stores WHERE store_number = '56'), DEFAULT),
+('2023-05-01', (SELECT customer_id FROM Customers WHERE customer_name = 'Ann Harris'), (SELECT store_id FROM Stores WHERE store_number = '56'), DEFAULT),
 ('2023-04-28', (SELECT customer_id FROM Customers WHERE customer_name = 'Lorraine Rogers'), (SELECT store_id FROM Stores WHERE store_number = '17'), DEFAULT),
 ('2023-04-27', (SELECT customer_id FROM Customers WHERE customer_name = 'Lorraine Rogers'), (SELECT store_id FROM Stores WHERE store_number = '17'), DEFAULT),
 ('2023-01-15', NULL, (SELECT store_id FROM Stores WHERE store_number = '100'), 'Store Transfer to Store Number 17');
@@ -94,7 +97,9 @@ CREATE TABLE StoreProducts (
 INSERT INTO StoreProducts (store_id, product_id, number_in_stock) VALUES
 ((SELECT store_id FROM Stores WHERE store_number = '17'), (SELECT product_id FROM Products WHERE product_description = 'PlayStation 5'), 0),
 ((SELECT store_id FROM Stores WHERE store_number = '17'), (SELECT product_id FROM Products WHERE product_description = 'Five Nights at Freddy''s Collectible Plush'), 11),
-((SELECT store_id FROM Stores WHERE store_number = '17'), (SELECT product_id FROM Products WHERE product_description = 'Super Mario Odyssey'), 10);
+((SELECT store_id FROM Stores WHERE store_number = '17'), (SELECT product_id FROM Products WHERE product_description = 'Super Mario Odyssey'), 10),
+((SELECT store_id FROM Stores WHERE store_number = '56'), (SELECT product_id FROM Products WHERE product_description = 'PlayStation 5'), 5),
+((SELECT store_id FROM Stores WHERE store_number = '100'), (SELECT product_id FROM Products WHERE product_description = 'PlayStation 5'), 7);
 
 -- OrderDetails Table
 DROP TABLE IF EXISTS OrderDetails;
@@ -114,8 +119,10 @@ CREATE TABLE OrderDetails (
 -- Example Data for OrderDetails Table
 INSERT INTO OrderDetails (order_id, product_id, order_quantity, line_total) VALUES
 (1, (SELECT product_id FROM Products WHERE product_description = 'PlayStation 5'), 1, 499.99),
+(1, (SELECT product_id FROM Products WHERE product_description = 'Elden Ring'), 1, 59.99),
 (2, (SELECT product_id FROM Products WHERE product_description = 'Five Nights at Freddy''s Collectible Plush'), 2, 25.98),
-(3, (SELECT product_id FROM Products WHERE product_description = 'Super Mario Odyssey'), 1, 54.99);
+(3, (SELECT product_id FROM Products WHERE product_description = 'Super Mario Odyssey'), 1, 54.99),
+(5, (SELECT product_id FROM Products WHERE product_description = 'PlayStation 5'), 3, 1499.97);
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
