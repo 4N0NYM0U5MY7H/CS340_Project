@@ -1,86 +1,39 @@
-<!DOCTYPE html>
-<html lang="en-US">
+{% extends "customers.j2" %}
+{% block main_heading %}{{ super() }} / Add Customer{% endblock %}
+{% block main_content %}
+<div>
+    <p>Warning: The following action cannot be undone.</p>
+</div>
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="description" content="Hero Electronics Database (Draft)" />
-        <meta name="author" content="Dania Magana & August Frisk" />
-        <title>Hero Electronics: Customers</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <style>
-            td {
-                padding: 0 10px;
-                text-align: center;
-            }
-            th {
-                padding: 0 15px;
-            }
-            table {
-                display: block;
-            }
-        </style>
-    </head>
+<div id="delete">
+    <form id="deleteCustomer" action="{{ url_for('delete_customers', customer_id=data[0].ID) }}" method="POST">
+        <fieldset>
+            <legend>Delete Customer</legend>
 
-    <body>
+            <label>ID</label>
+            <input value="{{ data[0].ID }}" id="customer_id" name="customer_id" disabled>
 
-        <header>
-            <h1>Hero Electronics</h1>
-        </header>
-        <hr />
-        <nav>
-            <a href="/customers">Customers</a> | Products | Stores | Store Products | Orders
-        </nav>
-        <hr />
-        
-        <h2>Customers</h2>
+            <br />
 
-        <div>
-            <p>Warning: The following action cannot be undone.</p>
-        </div>
+            <label>Name</label>
+            <input type="text" value="{{ data[0].Name }}" id="customer_name" name="customer_name" disabled />
 
-        <div is="delete">
-            <form id="deleteCustomer" action="/delete_customers/{{data[0].ID}}" method="POST">
-                <fieldset>
-                    <legend>Delete Customer</legend>
-                    
-                    <label>ID</label>
-                    <input value="{{data[0].ID}}" id="customer_id" name="customer_id" disabled>
+            <br />
 
-                    <br />
+            <label>Phone Number</label>
+            <input type="tel" value="{{ data[0].Phone }}" id="customer_phone" name="customer_phone" disabled />
 
-                    <label>Name</label>
-                    <input type="text" value="{{data[0].Name}}" id="customer_name" name="customer_name" disabled />
-                    
-                    <br />
-                    
-                    <label>Phone Number</label>
-                    <input type="tel" value="{{data[0].Phone}}" id="customer_phone" name="customer_phone" disabled />
-                    
-                    <br />
-                    
-                    <label>Email</label>
-                    <input type="email" value="{{data[0].Email}}" id="customer_email" name="customer_email" disabled />
-                </fieldset>
+            <br />
 
-                <p>
-                <input type="submit" value="Delete Customer" name="Delete_Customer" />
-                <a href="/customers"><input type="button" value="Cancel" /></a>
-                </p>
-            
-            </form>
-        </div>
+            <label>Email</label>
+            <input type="email" value="{{ data[0].Email }}" id="customer_email" name="customer_email" disabled />
+        </fieldset>
 
-        <footer>
-            <div align="center">
-                <p>&copy; 2023 August Frisk &amp; Dania Magana.
-                    <br />
-                    Customer data generated with <a href="https://randomuser.me/">Random User Generator</a>.
-                </p>
-            </div>
-        </footer>
-    </body>
+        <p>
+            <input type="submit" value="Delete Customer" name="Delete_Customer" />
+            <a href="{{ url_for('customers') }}"><input type="button" value="Cancel" /></a>
+        </p>
 
-</html>
+    </form>
+</div>
+{% endblock %}

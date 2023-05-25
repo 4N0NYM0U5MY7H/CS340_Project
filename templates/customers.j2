@@ -2,6 +2,7 @@
 {% block title %}: Customers{% endblock %}
 {% block main_heading %}Customers{% endblock %}
 {% block main_content %}
+
 <div>
     {% block search_form %}
     <form id="searchCustomer" action="{{ url_for('customers') }}" method="POST">
@@ -30,7 +31,7 @@
         <thead>
             <tr>
                 {% for key in data[0].keys() %}
-                <th scope="col" data-field="{{key}}" data-filter-control="input">{{key}}</th>
+                <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
                 {% endfor %}
 
                 <th>Update</th>
@@ -42,7 +43,7 @@
             {% for item in data %}
             <tr>
                 {% for key in item.keys() %}
-                <td>{{item[key]}}</td>
+                <td>{{ item[key] }}</td>
                 {% endfor %}
 
                 <!-- Update/Delete buttons -->
@@ -62,6 +63,7 @@
     {% endblock %}
 </div>
 {% endblock main_content %}
+
 {% block footer %}<br />
 Customer data generated with <a href="https://randomuser.me/">Random User Generator</a>.
 {% endblock %}
