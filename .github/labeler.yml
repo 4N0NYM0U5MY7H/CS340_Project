@@ -4,7 +4,7 @@ frontend:
 
 # Add 'backend' to any change relating to the flask app
 backend:
-- **/*.py
+- *.py
 - Pipfile
 - Pipfile.lock
 
@@ -15,7 +15,7 @@ dependencies:
 
 # Add 'database' to any changes to the DDL, DML, or other .sql files
 database:
-- **/*.sql
+- *.sql
 
 # Add `documentation` to any changes to the README
 documentation:
