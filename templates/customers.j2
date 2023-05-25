@@ -3,6 +3,7 @@
 {% block main_heading %}Customers{% endblock %}
 {% block main_content %}
 <div>
+    {% block search_form %}
     <form id="searchCustomer" action="{{ url_for('customers') }}" method="POST">
         <fieldset>
             <legend>Search for a Customer</legend>
@@ -16,12 +17,14 @@
             <input type="submit" value="Search" name="Search_Customer" />
         </fieldset>
     </form>
+    {% endblock search_form %}
 </div>
 
 <br />
 <br />
 
 <div id="browse">
+    {% block data_table %}
     {% if data %}
     <table>
         <thead>
@@ -52,7 +55,11 @@
         </tbody>
     </table>
     {% endif %}
+    {% endblock data_table %}
+
+    {% block table_button %}
     <p><a href="{{ url_for('add_customers') }}"><input type="button" value="Add New Customer"></a></p>
+    {% endblock %}
 </div>
 {% endblock main_content %}
 {% block footer %}<br />

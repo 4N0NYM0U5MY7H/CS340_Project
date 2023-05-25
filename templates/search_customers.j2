@@ -1,88 +1,18 @@
-<!DOCTYPE html>
-<html lang="en-US">
+{% extends "customers.j2" %}
+{% block main_heading %}{{ super() }} / Search Results{% endblock %}
+{% block main_content %}
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="description" content="Hero Electronics Database (Draft)" />
-        <meta name="author" content="Dania Magana & August Frisk" />
-        <title>Hero Electronics: Customers</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <style>
-            td {
-                padding: 0 10px;
-                text-align: center;
-            }
-            th {
-                padding: 0 15px;
-            }
-            table {
-                display: block;
-            }
-        </style>
-    </head>
+<div>
+    {% for message in get_flashed_messages() %}
+    <p>{{message}}</p>
+    {% endfor %}
+</div>
 
-    <body>
+{% block search_form %}{{ super() }}{% endblock %}
+{% block data_table %}{{ super() }}{% endblock %}
 
-        <header>
-            <h1>Hero Electronics</h1>
-        </header>
-        <hr />
-        <nav>
-            <a href="/customers">Customers</a> | Products | Stores | Store Products | Orders
-        </nav>
-        <hr />
-        
-        <h2>Customers</h2>
+{% block table_button%}
+<p><a href="/customers"><input type="button" value="Back" /></a></p>
+{% endblock %}
 
-        <div>
-            {% for message in get_flashed_messages() %}
-            <p>{{message}}</p>
-            {% endfor %}
-        </div>
-
-        <div id="search">
-            <table>
-                {% if data %}
-                    <thead>
-                        <tr>
-                            {% for key in data[0].keys() %}
-                            <th scope="col" data-field="{{key}}" data-filter-control="input">{{key}}</th>
-                            {% endfor %}
-
-                            <th>Update</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% for item in data %}
-                            <tr>
-                                {% for key in item.keys() %}
-                                <td>{{item[key]}}</td>
-                                {% endfor %}
-
-                                <!-- Update/Delete buttons -->
-                                <td><a href="/update_customers/{{item.ID}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                                <td><a href="/delete_customers/{{item.ID}}"><i class="fa-solid fa-trash"></i></a></td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                {% endif %}
-            </table>
-            <p><a href="/customers"><input type="button" value="Back" /></a></p>
-        </div>
-
-        <footer>
-            <div align="center">
-                <p>&copy; 2023 August Frisk &amp; Dania Magana.
-                    <br />
-                    Customer data generated with <a href="https://randomuser.me/">Random User Generator</a>.
-                </p>
-            </div>
-        </footer>
-    </body>
-
-</html>
+{% endblock %}
