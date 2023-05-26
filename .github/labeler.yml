@@ -1,6 +1,8 @@
 # Add 'frontend' to any change within the public_html directory
 frontend:
 - public_html/*
+- templates/*
+- static/*
 
 # Add 'backend' to any change relating to the flask app
 backend:
