@@ -1,72 +1,30 @@
-<!DOCTYPE html>
-<html lang="en-US">
+{% extends "customers.j2" %}
+{% block main_heading %}{{ super() }} / Add Customer{% endblock %}
+{% block main_content %}
+<div id="add">
+    <form id="addCustomer" action="{{ url_for('add_customers') }}" method="POST">
+        <fieldset>
+            <legend>Add New Customer</legend>
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="description" content="Hero Electronics Database (Draft)" />
-        <meta name="author" content="Dania Magana & August Frisk" />
-        <title>Hero Electronics: Customers</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <style>
-            td {
-                padding: 0 10px;
-                text-align: center;
-            }
-            th {
-                padding: 0 15px;
-            }
-        </style>
-    </head>
+            <label>Name</label>
+            <input type="text" id="customer_name" name="customer_name" placeholder="First Last" required />
 
-    <body>
+            <br />
 
-        <header>
-            <h1>Hero Electronics</h1>
-        </header>
-        <hr />
-        <nav>
-            <a href="/customers">Customers</a> | Products | Stores | Store Products | Orders
-        </nav>
-        <hr />
-        
-        <h2>Customers</h2>
+            <label>Phone Number</label>
+            <input type="tel" id="customer_phone" name="customer_phone" placeholder="(555) 123-4567" required />
 
-        <div id="add">
-            <form id="addCustomer" action="/add_customers" method="POST">
-                <fieldset>
-                    <legend>Add New Customer</legend>
-                
-                    <label>Name</label>
-                    <input type="text" id="customer_name" name="customer_name" placeholder="First Last" required />
-                
-                    <br />
-                
-                    <label>Phone Number</label>
-                    <input type="tel" id="customer_phone" name="customer_phone" placeholder="(555) 123-4567" required />
-                
-                    <br />
-                
-                    <label>Email</label>
-                    <input type="email" id="customer_email" name="customer_email" placeholder="something@example.com" required />
-                </fieldset>
-            
-                <input type="submit" value="Add Customer" name="Add_Customer" />
-                <a href="/customers"><input type="button" value="Cancel" /></a>
-            
-            </form>
-        </div>
+            <br />
 
-        <footer>
-            <div align="center">
-                <p>&copy; 2023 August Frisk &amp; Dania Magana.
-                    <br />
-                    Customer data generated with <a href="https://randomuser.me/">Random User Generator</a>.
-                </p>
-            </div>
-        </footer>
-    </body>
+            <label>Email</label>
+            <input type="email" id="customer_email" name="customer_email" placeholder="something@example.com"
+                required />
+        </fieldset>
 
-</html>
+        <input type="submit" value="Add Customer" name="Add_Customer" />
+        <a href="{{ url_for('customers') }}"><input type="button" value="Cancel" /></a>
+
+    </form>
+</div>
+{% endblock %}
+{% block footer %}{{ super.super() }}{% endblock %}

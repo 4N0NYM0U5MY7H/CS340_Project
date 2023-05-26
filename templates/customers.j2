@@ -1,101 +1,69 @@
-<!DOCTYPE html>
-<html lang="en-US">
+{% extends "base.j2" %}
+{% block title %}: Customers{% endblock %}
+{% block main_heading %}Customers{% endblock %}
+{% block main_content %}
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="description" content="Hero Electronics Database (Draft)" />
-        <meta name="author" content="Dania Magana & August Frisk" />
-        <title>Hero Electronics: Customers</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <style>
-            td {
-                padding: 0 10px;
-                text-align: center;
-            }
-            th {
-                padding: 0 15px;
-            }
-            table {
-                display: block;
-            }
-        </style>
-    </head>
+<div>
+    {% block search_form %}
+    <form id="searchCustomer" action="{{ url_for('customers') }}" method="POST">
+        <fieldset>
+            <legend>Search for a Customer</legend>
+            <label>Search By</label>
+            <select id="search_by" name="search_by">
+                <option value="customer_name">Name</option>
+                <option value="customer_phone">Phone</option>
+                <option value="customer_email">Email</option>
+            </select>
+            <input type="text" id="customer_search" name="customer_search" />
+            <input type="submit" value="Search" name="Search_Customer" />
+        </fieldset>
+    </form>
+    {% endblock search_form %}
+</div>
 
-    <body>
+<br />
+<br />
 
-        <header>
-            <h1>Hero Electronics</h1>
-        </header>
-        <hr />
-        <nav>
-            <a href="/customers">Customers</a> | Products | Stores | Store Products | Orders
-        </nav>
-        <hr />
-        
-        <h2>Customers</h2>
+<div id="browse">
+    {% block data_table %}
+    {% if data %}
+    <table>
+        <thead>
+            <tr>
+                {% for key in data[0].keys() %}
+                <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+                {% endfor %}
 
-        <div>
-            <form id="searchCustomer" action="/customers" method="POST">
-                <fieldset>
-                    <legend>Search for a Customer</legend>
-                    <label>Search By</label>
-                    <select id="search_by" name="search_by">
-                        <option value="customer_name">Name</option>
-                        <option value="customer_phone">Phone</option>
-                        <option value="customer_email">Email</option>
-                    </select>
-                    <input type="text" id="customer_search" name="customer_search" />
-                    <input type="submit" value="Search" name="Search_Customer" />
-                </fieldset>
-            </form>
-        </div>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
 
-        <br />
-        <br />
+        <tbody>
+            {% for item in data %}
+            <tr>
+                {% for key in item.keys() %}
+                <td>{{ item[key] }}</td>
+                {% endfor %}
 
-        <div id="browse">
-            <table>
-                {% if data %}
-                    <thead>
-                        <tr>
-                            {% for key in data[0].keys() %}
-                            <th scope="col" data-field="{{key}}" data-filter-control="input">{{key}}</th>
-                            {% endfor %}
+                <!-- Update/Delete buttons -->
+                <td><a href="{{ url_for('update_customers', customer_id=item.ID) }}"><i
+                            class="fa-solid fa-pen-to-square"></i></a></td>
+                <td><a href="{{ url_for('delete_customers', customer_id=item.ID) }}"><i
+                            class="fa-solid fa-trash"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {% endblock data_table %}
 
-                            <th>Update</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
+    {% block table_button %}
+    <p><a href="{{ url_for('add_customers') }}"><input type="button" value="Add New Customer"></a></p>
+    {% endblock %}
+</div>
+{% endblock main_content %}
 
-                    <tbody>
-                        {% for item in data %}
-                            <tr>
-                                {% for key in item.keys() %}
-                                <td>{{item[key]}}</td>
-                                {% endfor %}
-
-                                <!-- Update/Delete buttons -->
-                                <td><a href="/update_customers/{{item.ID}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                                <td><a href="/delete_customers/{{item.ID}}"><i class="fa-solid fa-trash"></i></a></td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                {% endif %}
-            </table>
-            <p><a href="/add_customers"><input type="button" value="Add New Customer"></a></p>
-        </div>
-
-        <footer>
-            <div align="center">
-                <p>&copy; 2023 August Frisk &amp; Dania Magana.
-                    <br />
-                    Customer data generated with <a href="https://randomuser.me/">Random User Generator</a>.
-                </p>
-            </div>
-        </footer>
-    </body>
-
-</html>
+{% block footer %}<br />
+Customer data generated with <a href="https://randomuser.me/">Random User Generator</a>.
+{% endblock %}
