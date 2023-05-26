@@ -6,3 +6,7 @@ td {
 th {
     padding: 0 15px;
 }
+
+input[type="email"] {
+    width: 200px;
+}
