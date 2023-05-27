@@ -141,25 +141,25 @@ def orders():
     if request.method == "GET":
         # display Order data
         query = "SELECT order_id AS 'ID', order_date AS 'Date', Customers.customer_name AS 'Customer', Stores.store_number AS 'Store Number', order_notes AS 'Notes' \
-                  FROM Orders \
-                  LEFT JOIN Customers ON Customers.customer_id = Orders.customer_id \
-                  INNER JOIN Stores ON Stores.store_id = Orders.store_id;"
+                 FROM Orders \
+                 LEFT JOIN Customers \
+                 ON Customers.customer_id = Orders.customer_id \
+                 LEFT JOIN Stores \
+                 ON Stores.store_id = Orders.store_id;"
         cur = mysql.connection.cursor()
         cur.execute(query)
         order_data = cur.fetchall()
 
         # display Order Detail data
-        query2 = "SELECT OrderDetails.order_detail_id AS 'ID', Orders.order_id AS 'Order ID', Products.product_description AS 'Product', order_quantity AS 'Quantity', line_total AS 'Line Total' \
+        query2 = "SELECT order_detail_id AS 'ID', order_id AS 'Order ID', Products.product_description AS 'Product', order_quantity AS 'Quantity', line_total AS 'Line Total' \
                   FROM OrderDetails \
-                  INNER JOIN Orders \
-                  ON Orders.order_id = OrderDetails.order_id \
                   INNER JOIN Products \
                   ON Products.product_id = OrderDetails.product_id;"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         order_detail_data = cur.fetchall()
 
-        # render customers page
+        # render orders page
         return render_template("orders.j2", order_data=order_data, order_detail_data=order_detail_data)
     
 # route for adding an Order
@@ -178,7 +178,7 @@ def add_orders():
         cur.execute(query2)
         store_data = cur.fetchall()
 
-        # user presses Add New Customer button in customers page
+        # user presses Add New Order button in orders page
         return render_template("add_orders.j2", customers=customer_data, stores=store_data)
     
     if request.method == "POST":
@@ -190,17 +190,12 @@ def add_orders():
             order_notes = request.form["order_notes"]
 
             # insert new Order into database
-            # account for null customer_id
-            if customer_id == "NULL":
-                query = "INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES (%s, NULL, %s, %s);"
-            # no null inputs
-            else:
-                query = "INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES (%s, %s, %s, %s);"
-                cur = mysql.connection.cursor()
-                cur.execute(query, (order_date, customer_id, store_id, order_notes))
-                mysql.connection.commit()
+            query = "INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES (%s, %s, %s, %s);"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (order_date, customer_id, store_id, order_notes))
+            mysql.connection.commit()
 
-            # redirect back to customers page
+            # redirect back to orders page
             return redirect("/orders")
         
 # route for adding an OrderDetail
@@ -209,18 +204,18 @@ def add_order_details():
     if request.method == "GET":
         # query to grab order id data for dropdown
         query = "SELECT order_id, CONCAT(order_id, ' | ', order_date, ' | ', Customers.customer_name, ' | ', Stores.store_number) AS 'Order' \
-                    FROM Orders \
-                    INNER JOIN Customers ON Customers.customer_id = Orders.customer_id \
-                    INNER JOIN Stores ON Stores.store_id = Orders.store_id;"
+                 FROM Orders \
+                 INNER JOIN Customers ON Customers.customer_id = Orders.customer_id \
+                 INNER JOIN Stores ON Stores.store_id = Orders.store_id;"
         cur = mysql.connection.cursor()
         cur.execute(query)
         order_data = cur.fetchall()
 
         # query to grab order id data if customer is NULL for dropdown
         query2 = "SELECT order_id, CONCAT(order_id, ' | ', order_date, ' | ', 'None', ' | ', Stores.store_number) AS 'Order' \
-                    FROM Orders \
-                    INNER JOIN Stores ON Stores.store_id = Orders.store_id \
-                    WHERE Orders.customer_id is NULL;"
+                  FROM Orders \
+                  INNER JOIN Stores ON Stores.store_id = Orders.store_id \
+                  WHERE Orders.customer_id is NULL;"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         null_order_data = cur.fetchall()
@@ -248,7 +243,7 @@ def add_order_details():
             cur.execute(query, (order_id, product_id, order_quantity, line_total))
             mysql.connection.commit()
 
-            # redirect back to customers page
+            # redirect back to orders page
             return redirect("/orders")
 
 # route for deleting an Order
@@ -258,7 +253,7 @@ def delete_orders(order_id):
         query = "SELECT order_id AS 'ID', order_date AS 'Date', Customers.customer_name AS 'Customer', Stores.store_number AS 'Store Number', order_notes AS 'Notes' \
                  FROM Orders \
                  LEFT JOIN Customers ON Customers.customer_id = Orders.customer_id \
-                 INNER JOIN Stores ON Stores.store_id = Orders.store_id \
+                 LEFT JOIN Stores ON Stores.store_id = Orders.store_id \
                  WHERE order_id = %s;"
         cur = mysql.connection.cursor()
         cur.execute(query, (order_id,))
@@ -274,10 +269,9 @@ def delete_orders(order_id):
             cur.execute(query, (order_id,))
             mysql.connection.commit()
 
-            # redirect back to customers page
+            # redirect back to orders page
             return redirect("/orders")
 
 # Listener
 if __name__ == "__main__":
-    # Start the app on port 3000, it will be different once hosted
     app.run(port=PORT, debug=True)
