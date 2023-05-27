@@ -133,6 +133,149 @@ def update_customers(customer_id):
             mysql.connection.commit()
 
             return redirect("/customers")
+        
+### Orders/OrderDetails ###
+# route for orders page
+@app.route("/orders", methods=["GET"])
+def orders():
+    if request.method == "GET":
+        # display Order data
+        query = "SELECT order_id AS 'ID', order_date AS 'Date', Customers.customer_name AS 'Customer', Stores.store_number AS 'Store Number', order_notes AS 'Notes' \
+                  FROM Orders \
+                  LEFT JOIN Customers ON Customers.customer_id = Orders.customer_id \
+                  INNER JOIN Stores ON Stores.store_id = Orders.store_id;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        order_data = cur.fetchall()
+
+        # display Order Detail data
+        query2 = "SELECT OrderDetails.order_detail_id AS 'ID', Orders.order_id AS 'Order ID', Products.product_description AS 'Product', order_quantity AS 'Quantity', line_total AS 'Line Total' \
+                  FROM OrderDetails \
+                  INNER JOIN Orders \
+                  ON Orders.order_id = OrderDetails.order_id \
+                  INNER JOIN Products \
+                  ON Products.product_id = OrderDetails.product_id;"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        order_detail_data = cur.fetchall()
+
+        # render customers page
+        return render_template("orders.j2", order_data=order_data, order_detail_data=order_detail_data)
+    
+# route for adding an Order
+@app.route("/add_orders", methods=["GET", "POST"])
+def add_orders():
+    if request.method == "GET":
+        # query to grab customer id/name data for dropdown
+        query = "SELECT customer_id, customer_name FROM Customers;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        customer_data = cur.fetchall()
+
+        # query to grab store id/number data for dropdown
+        query2 = "SELECT store_id, store_number FROM Stores;"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        store_data = cur.fetchall()
+
+        # user presses Add New Customer button in customers page
+        return render_template("add_orders.j2", customers=customer_data, stores=store_data)
+    
+    if request.method == "POST":
+        # user presses Add Order button
+        if request.form.get("Add_Order"):
+            order_date = request.form["order_date"]
+            customer_id = request.form["customer_name"]
+            store_id = request.form["store_number"]
+            order_notes = request.form["order_notes"]
+
+            # insert new Order into database
+            # account for null customer_id
+            if customer_id == "NULL":
+                query = "INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES (%s, NULL, %s, %s);"
+            # no null inputs
+            else:
+                query = "INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES (%s, %s, %s, %s);"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (order_date, customer_id, store_id, order_notes))
+                mysql.connection.commit()
+
+            # redirect back to customers page
+            return redirect("/orders")
+        
+# route for adding an OrderDetail
+@app.route("/add_order_details", methods=["GET", "POST"])
+def add_order_details():
+    if request.method == "GET":
+        # query to grab order id data for dropdown
+        query = "SELECT order_id, CONCAT(order_id, ' | ', order_date, ' | ', Customers.customer_name, ' | ', Stores.store_number) AS 'Order' \
+                    FROM Orders \
+                    INNER JOIN Customers ON Customers.customer_id = Orders.customer_id \
+                    INNER JOIN Stores ON Stores.store_id = Orders.store_id;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        order_data = cur.fetchall()
+
+        # query to grab order id data if customer is NULL for dropdown
+        query2 = "SELECT order_id, CONCAT(order_id, ' | ', order_date, ' | ', 'None', ' | ', Stores.store_number) AS 'Order' \
+                    FROM Orders \
+                    INNER JOIN Stores ON Stores.store_id = Orders.store_id \
+                    WHERE Orders.customer_id is NULL;"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        null_order_data = cur.fetchall()
+
+        # query to grab product id/description data for dropdown
+        query2 = "SELECT product_id, product_description FROM Products;"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        product_data = cur.fetchall()
+
+        # user presses Add New Order Detail button in customers page
+        return render_template("add_order_details.j2", orders=order_data, products=product_data, null_orders=null_order_data)
+    
+    if request.method == "POST":
+        # user presses Add Order Detail button
+        if request.form.get("Add_Order_Detail"):
+            order_id = request.form["order_id"]
+            product_id = request.form["product_description"]
+            order_quantity = request.form["order_quantity"]
+            line_total = request.form["line_total"]
+
+            # insert new Order Detail into database
+            query = "INSERT INTO OrderDetails (order_id, product_id, order_quantity, line_total) VALUES (%s, %s, %s, %s);"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (order_id, product_id, order_quantity, line_total))
+            mysql.connection.commit()
+
+            # redirect back to customers page
+            return redirect("/orders")
+
+# route for deleting an Order
+@app.route("/delete_orders/<int:order_id>", methods=["GET", "POST"])
+def delete_orders(order_id):
+    if request.method == "GET":
+        query = "SELECT order_id AS 'ID', order_date AS 'Date', Customers.customer_name AS 'Customer', Stores.store_number AS 'Store Number', order_notes AS 'Notes' \
+                 FROM Orders \
+                 LEFT JOIN Customers ON Customers.customer_id = Orders.customer_id \
+                 INNER JOIN Stores ON Stores.store_id = Orders.store_id \
+                 WHERE order_id = %s;"
+        cur = mysql.connection.cursor()
+        cur.execute(query, (order_id,))
+        data = cur.fetchall()
+
+        return render_template("delete_orders.j2", data=data)
+
+    if request.method == "POST":
+        # user presses Delete button
+        if request.form.get("Delete_Order"):
+            query = "DELETE FROM Orders WHERE order_id = %s;"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (order_id,))
+            mysql.connection.commit()
+
+            # redirect back to customers page
+            return redirect("/orders")
 
 # Listener
 if __name__ == "__main__":
