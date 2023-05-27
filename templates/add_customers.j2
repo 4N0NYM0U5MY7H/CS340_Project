@@ -1,7 +1,7 @@
 {% extends "customers.j2" %}
 {% block main_heading %}{{ super() }} / Add Customer{% endblock %}
 {% block main_content %}
-<div id="add">
+<div id="add_customer">
     <form id="addCustomer" action="{{ url_for('add_customers') }}" method="POST">
         <fieldset>
             <legend>Add New Customer</legend>
@@ -17,8 +17,8 @@
             <br />
 
             <label>Email</label>
-            <input type="email" id="customer_email" name="customer_email" placeholder="something@example.com"
-                required />
+            <input type="email" id="customer_email" name="customer_email" placeholder="something@example.com" required />
+        
         </fieldset>
 
         <input type="submit" value="Add Customer" name="Add_Customer" />

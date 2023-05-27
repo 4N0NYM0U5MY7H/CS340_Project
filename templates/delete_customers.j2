@@ -5,7 +5,7 @@
     <p>Warning: The following action cannot be undone.</p>
 </div>
 
-<div id="delete">
+<div id="delete_customer">
     <form id="deleteCustomer" action="{{ url_for('delete_customers', customer_id=data[0].ID) }}" method="POST">
         <fieldset>
             <legend>Delete Customer</legend>
@@ -27,6 +27,7 @@
 
             <label>Email</label>
             <input type="email" value="{{ data[0].Email }}" id="customer_email" name="customer_email" disabled />
+        
         </fieldset>
 
         <p>

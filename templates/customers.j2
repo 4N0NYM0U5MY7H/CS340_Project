@@ -24,7 +24,7 @@
 <br />
 <br />
 
-<div id="browse">
+<div id="browse_customers">
     {% block data_table %}
     {% if data %}
     <table>
@@ -47,10 +47,8 @@
                 {% endfor %}
 
                 <!-- Update/Delete buttons -->
-                <td><a href="{{ url_for('update_customers', customer_id=item.ID) }}"><i
-                            class="fa-solid fa-pen-to-square"></i></a></td>
-                <td><a href="{{ url_for('delete_customers', customer_id=item.ID) }}"><i
-                            class="fa-solid fa-trash"></i></a></td>
+                <td><a href="{{ url_for('update_customers', customer_id=item.ID) }}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                <td><a href="{{ url_for('delete_customers', customer_id=item.ID) }}"><i class="fa-solid fa-trash"></i></a></td>
             </tr>
             {% endfor %}
         </tbody>
