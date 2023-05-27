@@ -1,6 +1,8 @@
 {% extends "base.j2" %}
 {% block title %}: Customers{% endblock %}
+
 {% block main_heading %}Customers{% endblock %}
+
 {% block main_content %}
 
 <div>
@@ -60,6 +62,7 @@
     <p><a href="{{ url_for('add_customers') }}"><input type="button" value="Add New Customer"></a></p>
     {% endblock %}
 </div>
+
 {% endblock main_content %}
 
 {% block footer %}<br />

@@ -1,5 +1,6 @@
 {% extends "orders.j2" %}
 {% block main_heading %}{{ super() }} / Add Order Detail{% endblock %}
+
 {% block main_content %}
 <div id="add_order_detail">
     <form id="addOrderDetail" action="{{ url_for('add_order_details') }}" method="POST">
@@ -8,14 +9,16 @@
 
             <label>Order ID</label>
             <select id="order_id" name="order_id" required>
-            {% if orders or null_orders %}
+            {% if orders %}
                 <option value="" selected disabled hidden>Order ID | Date | Customer | Store Number</option>
                 {% for item in orders %}
                     <option value={{ item['order_id'] }}>{{ item['Order'] }}</option>
                 {% endfor %}
-                {% for item in null_orders %}
-                    <option value={{ item['order_id'] }}>{{ item['Order'] }}</option>
-                {% endfor %}
+                {% if null_orders %}
+                    {% for item in null_orders %}
+                        <option value={{ item['order_id'] }}>{{ item['Order'] }}</option>
+                    {% endfor %}
+                {% endif %}
             {% endif %}
             </select>
 
@@ -47,4 +50,5 @@
     </form>
 </div>
 {% endblock %}
+
 {% block footer %}{{ super.super() }}{% endblock %}

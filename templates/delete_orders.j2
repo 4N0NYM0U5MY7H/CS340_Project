@@ -1,5 +1,6 @@
 {% extends "orders.j2" %}
 {% block main_heading %}{{ super() }} / Delete Order{% endblock %}
+
 {% block main_content %}
 <div>
     <p>Warning: The following action cannot be undone.</p>
@@ -32,7 +33,7 @@
 
             <label>Notes</label>
             <br />
-            <textarea value="{{ data[0].Notes }}" id="order_notes" name="order_notes" disabled></textarea>
+            <textarea id="order_notes" name="order_notes" disabled>{{ data[0].Notes }}</textarea>
         
         </fieldset>
 

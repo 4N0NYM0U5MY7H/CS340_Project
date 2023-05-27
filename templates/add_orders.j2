@@ -1,5 +1,6 @@
 {% extends "orders.j2" %}
 {% block main_heading %}{{ super() }} / Add Order{% endblock %}
+
 {% block main_content %}
 <div id="add_order">
     <form id="addOrder" action="{{ url_for('add_orders') }}" method="POST">
@@ -13,8 +14,8 @@
 
             <label>Customer</label>
             <select id="customer_name" name="customer_name" required>
-            {% if customers %}
                 <option value="NULL">NULL</option>
+            {% if customers %}
                 {% for item in customers %}
                     <option value={{ item['customer_id'] }}>{{ item['customer_name'] }}</option>
                 {% endfor %}
@@ -34,7 +35,8 @@
 
             <br />
 
-            <label>Notes</label>
+            <label>Notes (optional)</label>
+            <br />
             <textarea id="order_notes" name="order_notes"></textarea>
         </fieldset>
 
@@ -44,4 +46,5 @@
     </form>
 </div>
 {% endblock %}
+
 {% block footer %}{{ super.super() }}{% endblock %}

@@ -1,6 +1,8 @@
 {% extends "base.j2" %}
 {% block title %}: Orders{% endblock %}
+
 {% block main_heading %}Orders{% endblock %}
+
 {% block main_content %}
 
 <div id="browse_orders">
@@ -41,6 +43,7 @@
 <br />
 <br />
 
+<h2>Order Details</h2>
 <div id="browse_order_details">
     {% block order_detail_data_table %}
     {% if order_detail_data %}
@@ -70,6 +73,7 @@
     <p><a href="{{ url_for('add_order_details') }}"><input type="button" value="Add New Order Detail"></a></p>
     {% endblock %}
 </div>
+
 {% endblock main_content %}
 
 {% block footer %}<br />
