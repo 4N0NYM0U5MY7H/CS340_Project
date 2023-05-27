@@ -133,7 +133,16 @@ SELECT store_id, store_number FROM Stores;
 SELECT product_id, product_description FROM Products;
 
 -- get all Order IDs to populate Order ID dropdown
-SELECT CONCAT(order_id, ' | ', order_date, ' | ', customer_id, ' | ', store_id) AS 'Order ID' FROM Orders;
+SELECT order_id, CONCAT(order_id, ' | ', order_date, ' | ', Customers.customer_name, ' | ', Stores.store_number) AS 'Order' 
+FROM Orders 
+INNER JOIN Customers ON Customers.customer_id = Orders.customer_id 
+INNER JOIN Stores ON Stores.store_id = Orders.store_id;
+
+-- get all Order IDs where Customer is NuLL to populate Order ID dropdown
+SELECT order_id, CONCAT(order_id, ' | ', order_date, ' | ', 'None', ' | ', Stores.store_number) AS 'Order' 
+FROM Orders 
+INNER JOIN Stores ON Stores.store_id = Orders.store_id 
+WHERE Orders.customer_id is NULL;
 
 -- add a new Order
 INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES
