@@ -112,14 +112,12 @@ SELECT order_id AS 'ID', order_date AS 'Date', Customers.customer_name AS 'Custo
 FROM Orders
 LEFT JOIN Customers
 ON Customers.customer_id = Orders.customer_id
-INNER JOIN Stores
+LEFT JOIN Stores
 ON Stores.store_id = Orders.store_id;
 
 -- get all Order Details
-SELECT OrderDetails.order_detail_id AS 'ID', Orders.order_id AS 'Order ID', Products.product_description AS 'Product', order_quantity AS 'Quantity', line_total AS 'Line Total'
+SELECT order_detail_id AS 'ID', order_id AS 'Order ID', Products.product_description AS 'Product', order_quantity AS 'Quantity', line_total AS 'Line Total'
 FROM OrderDetails
-INNER JOIN Orders
-ON Orders.order_id = OrderDetails.order_id
 INNER JOIN Products
 ON Products.product_id = OrderDetails.product_id;
 
