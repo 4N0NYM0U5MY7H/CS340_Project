@@ -134,6 +134,90 @@ def update_customers(customer_id):
 
             return redirect("/customers")
         
+### Stores ###
+# route for stores page
+@app.route("/stores", methods=["GET", "POST"])
+def stores():
+    if request.method == "GET":
+        # display Store data
+        query = "SELECT store_id AS 'ID', store_number AS 'Store Number', store_phone AS 'Phone', store_email AS 'Email' FROM Stores;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        # render stores page
+        return render_template("stores.j2", data=data)
+    
+# route for adding a Store
+@app.route("/add_stores", methods=["GET", "POST"])
+def add_stores():
+    if request.method == "GET":
+        # user presses Add New Store button in stores page
+        return render_template("add_stores.j2")
+    
+    if request.method == "POST":
+        # user presses Add Store button
+        if request.form.get("Add_Store"):
+            store_number = request.form["store_number"]
+            store_phone = request.form["store_phone"]
+            store_email = request.form["store_email"]
+
+            # insert new Store into database
+            query = "INSERT INTO Stores (store_number, store_phone, store_email) VALUES (%s, %s, %s);"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (store_number, store_phone, store_email))
+            mysql.connection.commit()
+
+            # redirect back to stores page
+            return redirect("/stores")
+        
+# route for deleting a Store
+@app.route("/delete_stores/<int:store_id>", methods=["GET", "POST"])
+def delete_stores(store_id):
+    if request.method == "GET":
+        query = "SELECT store_id AS 'ID', store_number AS 'Store Number', store_phone AS 'Phone', store_email AS 'Email' FROM Stores WHERE store_id = %s;"
+        cur = mysql.connection.cursor()
+        cur.execute(query, (store_id,))
+        data = cur.fetchall()
+
+        return render_template("delete_stores.j2", data=data)
+
+    if request.method == "POST":
+        # user presses Delete button
+        if request.form.get("Delete_Store"):
+            query = "DELETE FROM Stores WHERE store_id = %s;"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (store_id,))
+            mysql.connection.commit()
+
+            # redirect back to stores page
+            return redirect("/stores")
+        
+# route for updating a Store
+@app.route("/update_stores/<int:store_id>", methods=["GET", "POST"])
+def update_stores(store_id):
+    if request.method == "GET":
+        query = "SELECT store_id AS 'ID', store_number AS 'Store Number', store_phone AS 'Phone', store_email AS 'Email' FROM Stores WHERE store_id = %s;"
+        cur = mysql.connection.cursor()
+        cur.execute(query, (store_id,))
+        data = cur.fetchall()
+
+        return render_template("update_stores.j2", data=data)
+    
+    if request.method == "POST":
+        # user presses Update button
+        if request.form.get("Update_Store"):
+            store_number = request.form["store_number"]
+            store_phone = request.form["store_phone"]
+            store_email = request.form["store_email"]
+
+            query = "UPDATE Stores SET store_number = %s, store_phone = %s, store_email = %s WHERE store_id = %s;"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (store_number, store_phone, store_email, store_id))
+            mysql.connection.commit()
+
+            return redirect("/stores")
+        
 ### Store Products ###
 # route for store_products page
 @app.route("/store_products", methods=["GET"])
