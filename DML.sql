@@ -12,7 +12,7 @@ INSERT INTO Customers (customer_name, customer_phone, customer_email) VALUES
 (:nameInput, :phoneInput, :emailInput);
 
 -- update a Customer
-SELECT customer_id, customer_name, customer_phone, customer_email
+SELECT customer_id AS 'ID', customer_name AS 'Name', customer_phone AS 'Phone', customer_email AS 'Email'
 FROM Customers
 WHERE customer_id = :customer_id_selected_from_browse_customers_page;
 
@@ -35,7 +35,7 @@ INSERT INTO Products (product_description, product_price) VALUES
 (:descriptionInput, :priceInput);
 
 -- update a Product
-SELECT product_id, product_description, product_price
+SELECT product_id AS 'ID', product_description AS 'Description', product_price AS 'Price'
 FROM Products
 WHERE product_id = :product_id_selected_from_browse_products_page;
 
@@ -58,7 +58,7 @@ INSERT INTO Stores (store_number, store_phone, store_email) VALUES
 (:numberInput, :phoneInput, :emailInput);
 
 -- update a Store
-SELECT store_id, store_number, store_phone, store_email
+SELECT store_id AS 'ID', store_number AS 'Store Number', store_phone AS 'Phone', store_email AS 'Email'
 FROM Stores
 WHERE store_id = :store_id_selected_from_browse_stores_page;
 
@@ -92,8 +92,12 @@ INSERT INTO StoreProducts (store_id, product_id, number_in_stock) VALUES
 (:store_id_from_dropdown_Input, :product_id_from_dropdown_Input, :number_in_stock_Input);
 
 -- update a Store Product
-SELECT store_product_id, store_id, product_id, number_in_stock
+SELECT store_product_id AS 'ID', Stores.store_number AS 'Store Number', Products.product_description AS 'Product', number_in_stock AS 'In Stock'
 FROM StoreProducts
+INNER JOIN Stores
+ON Stores.store_id = StoreProducts.store_id
+INNER JOIN Products
+ON Products.product_id = StoreProducts.product_id
 WHERE store_product_id = :store_product_id_selected_from_browse_stores_page;
 
 UPDATE StoreProducts
