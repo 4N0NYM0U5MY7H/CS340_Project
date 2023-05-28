@@ -1,0 +1,30 @@
+{% extends "stores.j2" %}
+{% block main_heading %}{{ super() }} / Add Store{% endblock %}
+{% block main_content %}
+<div id="add_store">
+    <form id="addStore" action="{{ url_for('add_stores') }}" method="POST">
+        <fieldset>
+            <legend>Add New Store</legend>
+
+            <label>Store Number</label>
+            <input type="text" id="store_number" name="store_number" placeholder="999" required />
+
+            <br />
+
+            <label>Phone Number</label>
+            <input type="tel" id="store_phone" name="store_phone" placeholder="(555) 123-4567" required />
+
+            <br />
+
+            <label>Email</label>
+            <input type="email" id="store_email" name="store_email" placeholder="something@example.com" required />
+        
+        </fieldset>
+
+        <input type="submit" value="Add Store" name="Add_Store" />
+        <a href="{{ url_for('stores') }}"><input type="button" value="Cancel" /></a>
+
+    </form>
+</div>
+{% endblock %}
+{% block footer %}{{ super.super() }}{% endblock %}
