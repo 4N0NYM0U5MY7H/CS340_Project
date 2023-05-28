@@ -134,6 +134,125 @@ def update_customers(customer_id):
 
             return redirect("/customers")
         
+### Store Products ###
+# route for store_products page
+@app.route("/store_products", methods=["GET"])
+def store_products():
+    if request.method == "GET":
+        # display Store Product data
+        query = "SELECT store_product_id AS 'ID', Stores.store_number AS 'Store Number', Products.product_description AS 'Product', number_in_stock AS 'In Stock' \
+                 FROM StoreProducts \
+                 INNER JOIN Stores ON Stores.store_id = StoreProducts.store_id \
+                 INNER JOIN Products ON Products.product_id = StoreProducts.product_id;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        # render store_products page
+        return render_template("store_products.j2", data=data)
+    
+# route for adding a Store Product
+@app.route("/add_store_products", methods=["GET", "POST"])
+def add_store_products():
+    if request.method == "GET":
+        # query to grab store id/number data for dropdown
+        query = "SELECT store_id, store_number FROM Stores;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        store_data = cur.fetchall()
+
+        # query to grab product id/description data for dropdown
+        query2 = "SELECT product_id, product_description FROM Products;"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        product_data = cur.fetchall()
+
+        # user presses Add New Store Product button in store_products page
+        return render_template("add_store_products.j2", stores=store_data, products=product_data)
+    
+    if request.method == "POST":
+        # user presses Add Store Product button
+        if request.form.get("Add_Store_Product"):
+            store_id = request.form["store_number"]
+            product_id = request.form["product_description"]
+            number_in_stock = request.form["number_in_stock"]
+
+            # insert new Store Product into database
+            query = "INSERT INTO StoreProducts (store_id, product_id, number_in_stock) VALUES (%s, %s, %s);"
+            cur = mysql.connection.cursor()
+            cur.execute(query, ( store_id, product_id, number_in_stock))
+            mysql.connection.commit()
+
+            # redirect back to store_products page
+            return redirect("/store_products")
+
+# route for deleting a Store Product
+@app.route("/delete_store_products/<int:store_product_id>", methods=["GET", "POST"])
+def delete_store_products(store_product_id):
+    if request.method == "GET":
+        query = "SELECT store_product_id AS 'ID', Stores.store_number AS 'Store Number', Products.product_description AS 'Product', number_in_stock AS 'In Stock' \
+                 FROM StoreProducts \
+                 INNER JOIN Stores ON Stores.store_id = StoreProducts.store_id \
+                 INNER JOIN Products ON Products.product_id = StoreProducts.product_id \
+                 WHERE store_product_id = %s;"
+        cur = mysql.connection.cursor()
+        cur.execute(query, (store_product_id,))
+        data = cur.fetchall()
+
+        return render_template("delete_store_products.j2", data=data)
+
+    if request.method == "POST":
+        # user presses Delete button
+        if request.form.get("Delete_Store_Product"):
+            query = "DELETE FROM StoreProducts WHERE store_product_id = %s;"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (store_product_id,))
+            mysql.connection.commit()
+
+            # redirect back to store_products page
+            return redirect("/store_products")
+
+# route for updating a Store Product
+@app.route("/update_store_products/<int:store_product_id>", methods=["GET", "POST"])
+def update_store_products(store_product_id):
+    if request.method == "GET":
+        query = "SELECT store_product_id AS 'ID', Stores.store_number AS 'Store Number', Products.product_description AS 'Product', number_in_stock AS 'In Stock' \
+                 FROM StoreProducts \
+                 INNER JOIN Stores ON Stores.store_id = StoreProducts.store_id \
+                 INNER JOIN Products ON Products.product_id = StoreProducts.product_id \
+                 WHERE store_product_id = %s;"
+        cur = mysql.connection.cursor()
+        cur.execute(query, (store_product_id,))
+        data = cur.fetchall()
+
+        # query to grab store id/number data for dropdown
+        query2 = "SELECT store_id, store_number FROM Stores;"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        store_data = cur.fetchall()
+
+        # query to grab product id/description data for dropdown
+        query3 = "SELECT product_id, product_description FROM Products;"
+        cur = mysql.connection.cursor()
+        cur.execute(query3)
+        product_data = cur.fetchall()
+
+        return render_template("update_store_products.j2", data=data, stores=store_data, products=product_data)
+    
+    if request.method == "POST":
+        # user presses Update button
+        if request.form.get("Update_Store_Product"):
+            store_id = request.form["store_number"]
+            product_id = request.form["product_description"]
+            number_in_stock = request.form["number_in_stock"]
+
+            query = "UPDATE StoreProducts SET store_id = %s, product_id = %s, number_in_stock = %s WHERE store_product_id = %s;"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (store_id, product_id, number_in_stock, store_product_id))
+            mysql.connection.commit()
+
+            return redirect("/store_products")
+        
 ### Orders/OrderDetails ###
 # route for orders page
 @app.route("/orders", methods=["GET"])
@@ -142,10 +261,8 @@ def orders():
         # display Order data
         query = "SELECT order_id AS 'ID', order_date AS 'Date', Customers.customer_name AS 'Customer', Stores.store_number AS 'Store Number', order_notes AS 'Notes' \
                  FROM Orders \
-                 LEFT JOIN Customers \
-                 ON Customers.customer_id = Orders.customer_id \
-                 LEFT JOIN Stores \
-                 ON Stores.store_id = Orders.store_id;"
+                 LEFT JOIN Customers ON Customers.customer_id = Orders.customer_id \
+                 LEFT JOIN Stores ON Stores.store_id = Orders.store_id;"
         cur = mysql.connection.cursor()
         cur.execute(query)
         order_data = cur.fetchall()
@@ -221,9 +338,9 @@ def add_order_details():
         null_order_data = cur.fetchall()
 
         # query to grab product id/description data for dropdown
-        query2 = "SELECT product_id, product_description FROM Products;"
+        query3 = "SELECT product_id, product_description FROM Products;"
         cur = mysql.connection.cursor()
-        cur.execute(query2)
+        cur.execute(query3)
         product_data = cur.fetchall()
 
         # user presses Add New Order Detail button in customers page
