@@ -1,6 +1,8 @@
 {% extends "products.j2" %}
 {% block main_heading %}{{ super() }} / Update Product{% endblock %}
+
 {% block main_content %}
+
 <div id="update_product">
     <table>
         {% if data %}
@@ -55,4 +57,5 @@
 
     </form>
 </div>
+
 {% endblock %}

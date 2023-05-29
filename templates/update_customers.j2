@@ -1,6 +1,8 @@
 {% extends "customers.j2" %}
 {% block main_heading %}{{ super() }} / Update Customer{% endblock %}
+
 {% block main_content %}
+
 <div id="update_customer">
     <table>
         {% if data %}
@@ -50,6 +52,7 @@
 
             <label>Email</label>
             <input type="email" value="{{ data[0].Email }}" id="customer_email" name="customer_email" required />
+        
         </fieldset>
 
         <p>
@@ -59,4 +62,5 @@
 
     </form>
 </div>
+
 {% endblock %}

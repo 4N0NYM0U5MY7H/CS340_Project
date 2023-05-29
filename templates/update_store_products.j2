@@ -1,6 +1,8 @@
 {% extends "store_products.j2" %}
 {% block main_heading %}{{ super() }} / Update Store Product{% endblock %}
+
 {% block main_content %}
+
 <div id="update_store_product">
     <table>
         {% if data %}
@@ -70,6 +72,7 @@
 
             <label>Number in Stock</label>
             <input type="number" value="{{ data[0]['In Stock'] }}" id="number_in_stock" name="number_in_stock" required />
+        
         </fieldset>
 
         <p>
@@ -79,4 +82,5 @@
 
     </form>
 </div>
+
 {% endblock %}
