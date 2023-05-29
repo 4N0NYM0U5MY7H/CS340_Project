@@ -2,6 +2,7 @@
 <html lang="en-US">
 
     <head>
+        
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,6 +15,7 @@
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+    
     </head>
 
     <body>
@@ -21,15 +23,17 @@
         <header>
             <h1>Hero Electronics</h1>
         </header>
+        
         <hr />
+        
         <nav>
-            <a href="{{ url_for('customers') }}">Customers</a> | <a href="#">Products</a> | <a href="#">Stores</a> | <a
-                href="#">Store Products</a>
-            | <a href="#">Orders</a>
+            <a href="{{ url_for('customers') }}">Customers</a> | <a href="{{ url_for('products') }}">Products</a> | <a href="{{ url_for('stores') }}">Stores</a> | <a href="{{ url_for('store_products') }}">Store Products</a> | <a href="{{ url_for('orders') }}">Orders</a>
         </nav>
+        
         <hr />
 
         <main>
+            
             <h2>{% block main_heading %}{% endblock %}</h2>
 
             <div id="main_content">
@@ -39,11 +43,13 @@
         </main>
 
         <footer>
+            
             <div align="center">
                 <p>&copy; 2023 Dania Magana &amp; August Frisk.
                     {% block footer %}{% endblock %}
                 </p>
             </div>
+        
         </footer>
 
     </body>
