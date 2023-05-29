@@ -2,6 +2,7 @@
 {% block main_heading %}{{ super() }} / Add Order{% endblock %}
 
 {% block main_content %}
+
 <div id="add_order">
     <form id="addOrder" action="{{ url_for('add_orders') }}" method="POST">
         <fieldset>
@@ -38,6 +39,7 @@
             <label>Notes (optional)</label>
             <br />
             <textarea id="order_notes" name="order_notes"></textarea>
+        
         </fieldset>
 
         <input type="submit" value="Add Order" name="Add_Order" />
@@ -45,6 +47,7 @@
 
     </form>
 </div>
+
 {% endblock %}
 
 {% block footer %}{{ super.super() }}{% endblock %}

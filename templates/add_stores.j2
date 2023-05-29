@@ -2,6 +2,7 @@
 {% block main_heading %}{{ super() }} / Add Store{% endblock %}
 
 {% block main_content %}
+
 <div id="add_store">
     <form id="addStore" action="{{ url_for('add_stores') }}" method="POST">
         <fieldset>
@@ -27,6 +28,7 @@
 
     </form>
 </div>
+
 {% endblock %}
 
 {% block footer %}{{ super.super() }}{% endblock %}
