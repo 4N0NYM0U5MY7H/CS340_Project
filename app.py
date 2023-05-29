@@ -134,6 +134,88 @@ def update_customers(customer_id):
 
             return redirect("/customers")
         
+### Products ###
+# route for products page
+@app.route("/products", methods=["GET", "POST"])
+def products():
+    if request.method == "GET":
+        # display Product data
+        query = "SELECT product_id AS 'ID', product_description AS 'Description', product_price AS 'Price' FROM Products;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        # render products page
+        return render_template("products.j2", data=data)
+    
+# route for adding a Product
+@app.route("/add_products", methods=["GET", "POST"])
+def add_products():
+    if request.method == "GET":
+        # user presses Add New Product button in products page
+        return render_template("add_products.j2")
+    
+    if request.method == "POST":
+        # user presses Add Product button
+        if request.form.get("Add_Product"):
+            product_description = request.form["product_description"]
+            product_price = request.form["product_price"]
+
+            # insert new Product into database
+            query = "INSERT INTO Products (product_description, product_price) VALUES (%s, %s);"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (product_description, product_price))
+            mysql.connection.commit()
+
+            # redirect back to products page
+            return redirect("/products")
+        
+# route for deleting a Product
+@app.route("/delete_products/<int:product_id>", methods=["GET", "POST"])
+def delete_products(product_id):
+    if request.method == "GET":
+        query = "SELECT product_id AS 'ID', product_description AS 'Description', product_price AS 'Price' FROM Products WHERE product_id = %s;"
+        cur = mysql.connection.cursor()
+        cur.execute(query, (product_id,))
+        data = cur.fetchall()
+
+        return render_template("delete_products.j2", data=data)
+
+    if request.method == "POST":
+        # user presses Delete button
+        if request.form.get("Delete_Product"):
+            query = "DELETE FROM Products WHERE product_id = %s;"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (product_id,))
+            mysql.connection.commit()
+
+            # redirect back to products page
+            return redirect("/products")
+        
+# route for updating a Product
+@app.route("/update_products/<int:product_id>", methods=["GET", "POST"])
+def update_products(product_id):
+    if request.method == "GET":
+        query = "SELECT product_id AS 'ID', product_description AS 'Description', product_price AS 'Price' FROM Products WHERE product_id = %s;"
+        cur = mysql.connection.cursor()
+        cur.execute(query, (product_id,))
+        data = cur.fetchall()
+
+        return render_template("update_products.j2", data=data)
+    
+    if request.method == "POST":
+        # user presses Update button
+        if request.form.get("Update_Product"):
+            product_description = request.form["product_description"]
+            product_price = request.form["product_price"]
+
+            query = "UPDATE Products SET product_description = %s, product_price = %s WHERE product_id = %s;"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (product_description, product_price, product_id))
+            mysql.connection.commit()
+
+            return redirect("/products")
+
 ### Stores ###
 # route for stores page
 @app.route("/stores", methods=["GET", "POST"])
