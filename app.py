@@ -509,7 +509,7 @@ def add_order_details():
         cur.execute(query3)
         product_data = cur.fetchall()
 
-        # user presses Add New Order Detail button in customers page
+        # user presses Add New Order Detail button in orders page
         return render_template("add_order_details.j2", orders=order_data, products=product_data, null_orders=null_order_data)
     
     if request.method == "POST":
