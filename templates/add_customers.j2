@@ -1,5 +1,6 @@
 {% extends "customers.j2" %}
 {% block main_heading %}{{ super() }} / Add Customer{% endblock %}
+
 {% block main_content %}
 <div id="add_customer">
     <form id="addCustomer" action="{{ url_for('add_customers') }}" method="POST">
@@ -27,4 +28,5 @@
     </form>
 </div>
 {% endblock %}
+
 {% block footer %}{{ super.super() }}{% endblock %}
