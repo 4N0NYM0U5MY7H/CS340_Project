@@ -44,7 +44,7 @@ SET product_description = :descriptionInput, product_price = :priceInput
 WHERE product_id = :product_id_from_the_update_form;
 
 -- delete a Product
-DELETE FROM Products WHERE :product_id_selected_from_browse_products_page;
+DELETE FROM Products WHERE product_id = :product_id_selected_from_browse_products_page;
 
 -- ####################################################################
 -- The BROWSE stores.html Page
