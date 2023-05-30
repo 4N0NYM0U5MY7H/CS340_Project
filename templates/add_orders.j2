@@ -16,22 +16,22 @@
             <label>Customer</label>
             <select id="customer_name" name="customer_name" required>
                 <option value="NULL">NULL</option>
-            {% if customers %}
-                {% for item in customers %}
-                    <option value={{ item['customer_id'] }}>{{ item['customer_name'] }}</option>
-                {% endfor %}
-            {% endif %}
+                {% if customers %}
+                    {% for item in customers %}
+                        <option value="{{ item['customer_id'] }}">{{ item['customer_name'] }}</option>
+                    {% endfor %}
+                {% endif %}
             </select>
 
             <br />
 
             <label>Store Number</label>
             <select id="store_number" name="store_number" required>
-            {% if stores %}
-                {% for item in stores %}
-                    <option value={{ item['store_id'] }}>{{ item['store_number'] }}</option>
-                {% endfor %}
-            {% endif %}
+                {% if stores %}
+                    {% for item in stores %}
+                        <option value="{{ item['store_id'] }}">{{ item['store_number'] }}</option>
+                    {% endfor %}
+                {% endif %}
             </select>
 
             <br />
@@ -39,7 +39,7 @@
             <label>Notes (optional)</label>
             <br />
             <textarea id="order_notes" name="order_notes"></textarea>
-        
+
         </fieldset>
 
         <input type="submit" value="Add Order" name="Add_Order" />
