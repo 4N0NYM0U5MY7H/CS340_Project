@@ -629,10 +629,18 @@ def add_orders():
             order_notes = request.form["order_notes"]
 
             # Insert new Order into database.
-            query = "INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES (%s, %s, %s, %s);"
-            cur = mysql.connection.cursor()
-            cur.execute(query, (order_date, customer_id, store_id, order_notes))
-            mysql.connection.commit()
+            # account for null customer_id
+            if customer_id == "NULL":
+                query = "INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES (%s, %s, %s, %s);"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (order_date, NULL, store_id, order_notes))
+                mysql.connection.commit()
+            # no null inputs
+            else:
+                query = "INSERT INTO Orders (order_date, customer_id, store_id, order_notes) VALUES (%s, %s, %s, %s);"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (order_date, customer_id, store_id, order_notes))
+                mysql.connection.commit()
 
             return redirect("/orders")
 
