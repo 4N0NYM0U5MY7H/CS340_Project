@@ -3,6 +3,14 @@
 
 {% block main_content %}
 
+{% if get_flashed_messages() %}
+    <div id="flash_messages">
+        {% for message in get_flashed_messages() %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
 <div id="update_customer">
     <table>
         {% if data %}
@@ -41,17 +49,17 @@
             <br />
 
             <label>Name</label>
-            <input type="text" value="{{ data[0].Name }}" id="customer_name" name="customer_name" required />
+            <input type="text" value="{{ data[0].Name }}" id="customer_name" name="customer_name" pattern="^[a-zA-Z]+ [a-zA-Z]+$" required />
 
             <br />
 
             <label>Phone Number</label>
-            <input type="tel" value="{{ data[0].Phone }}" id="customer_phone" name="customer_phone" pattern="\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}" required />
+            <input type="tel" value="{{ data[0].Phone }}" id="customer_phone" name="customer_phone" pattern="^\(\d{3}\) \d{3}-\d{4}$" required />
 
             <br />
 
             <label>Email</label>
-            <input type="email" value="{{ data[0].Email }}" id="customer_email" name="customer_email" required />
+            <input type="email" value="{{ data[0].Email }}" id="customer_email" name="customer_email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" required />
         
         </fieldset>
 

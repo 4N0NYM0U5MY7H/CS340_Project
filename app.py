@@ -15,6 +15,7 @@ __authors__ = "Dania Magana, August Frisk"
 from flask import Flask, flash, render_template, redirect, request
 from flask_mysqldb import MySQL
 import os
+from database.validation import is_valid_name, is_valid_email, is_valid_phone
 
 app = Flask(__name__)
 
@@ -102,6 +103,33 @@ def add_customers():
             customer_phone = request.form["customer_phone"]
             customer_email = request.form["customer_email"]
 
+            # Validate customer_name.
+            if customer_name == "":
+                flash("Name cannot be empty.")
+                return redirect("/add_customers")
+
+            elif not is_valid_name(customer_name):
+                flash("Name must be in the format: Firstname Lastname")
+                return redirect("/add_customers")
+
+            # Validate customer_phone.
+            if customer_phone == "":
+                flash("Phone cannot be empty.")
+                return redirect("/add_customers")
+
+            elif not is_valid_phone(customer_phone):
+                flash("Phone must be in the format: (123) 456-7890")
+                return redirect("/add_customers")
+
+            # Validate customer_email.
+            if customer_email == "":
+                flash("Email cannot be empty.")
+                return redirect("/add_customers")
+
+            elif not is_valid_email(customer_email):
+                flash("Email must be in the format: example@email.com")
+                return redirect("/add_customers")
+
             # Insert new Customer into database.
             query = "INSERT INTO Customers (customer_name, customer_phone, customer_email) VALUES (%s, %s, %s);"
             cur = mysql.connection.cursor()
@@ -167,6 +195,29 @@ def update_customers(customer_id):
             customer_name = request.form["customer_name"]
             customer_phone = request.form["customer_phone"]
             customer_email = request.form["customer_email"]
+
+            # Validate customer_name.
+            if customer_name == "":
+                flash("Name cannot be empty.")
+                return redirect("/update_customers")
+
+            elif not is_valid_name(customer_name):
+                flash("Name must be in the format: Firstname Lastname")
+                return redirect("/update_customers")
+
+            # Validate customer_phone.
+            if customer_phone == "":
+                flash("Phone cannot be empty.")
+                return redirect("/update_customers")
+
+            elif not is_valid_phone(customer_phone):
+                flash("Phone must be in the format: (123) 456-7890")
+                return redirect("/update_customers")
+
+            # Validate customer_email.
+            if customer_email == "":
+                flash("Email cannot be empty.")
+                return redirect("/update_customers")
 
             query = """UPDATE Customers
                     SET customer_name = %s, customer_phone = %s, customer_email = %s
@@ -327,6 +378,24 @@ def add_stores():
             store_phone = request.form["store_phone"]
             store_email = request.form["store_email"]
 
+            # Validate store_phone.
+            if store_phone == "":
+                flash("Phone cannot be empty.")
+                return redirect("/add_stores")
+
+            elif not is_valid_phone(store_phone):
+                flash("Phone must be in the format: (123) 456-7890")
+                return redirect("/add_stores")
+
+            # Validate store_email.
+            if store_email == "":
+                flash("Email cannot be empty.")
+                return redirect("/add_stores")
+
+            elif not is_valid_email(store_email):
+                flash("Email must be in the format: heroelectronics1@email.com")
+                return redirect("/add_stores")
+
             # Insert new Store into database.
             query = "INSERT INTO Stores (store_number, store_phone, store_email) VALUES (%s, %s, %s);"
             cur = mysql.connection.cursor()
@@ -390,6 +459,24 @@ def update_stores(store_id):
             store_number = request.form["store_number"]
             store_phone = request.form["store_phone"]
             store_email = request.form["store_email"]
+
+            # Validate store_phone.
+            if store_phone == "":
+                flash("Phone cannot be empty.")
+                return redirect("/update_stores")
+
+            elif not is_valid_phone(store_phone):
+                flash("Phone must be in the format: (123) 456-7890")
+                return redirect("/update_stores")
+
+            # Validate store_email.
+            if store_email == "":
+                flash("Email cannot be empty.")
+                return redirect("/update_stores")
+
+            elif not is_valid_email(store_email):
+                flash("Email must be in the format: heroelectronics1@email.com")
+                return redirect("/update_stores")
 
             query = """UPDATE Stores
                     SET store_number = %s, store_phone = %s, store_email = %s

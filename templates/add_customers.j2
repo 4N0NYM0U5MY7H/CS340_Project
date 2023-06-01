@@ -3,23 +3,31 @@
 
 {% block main_content %}
 
+{% if get_flashed_messages() %}
+    <div id="flash_messages">
+        {% for message in get_flashed_messages() %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
 <div id="add_customer">
     <form id="addCustomer" action="{{ url_for('add_customers') }}" method="POST">
         <fieldset>
             <legend>Add New Customer</legend>
 
             <label>Name</label>
-            <input type="text" id="customer_name" name="customer_name" placeholder="First Last" required />
+            <input type="text" id="customer_name" name="customer_name" pattern="^[a-zA-Z]+ [a-zA-Z]+$" placeholder="FirstName LastName" required />
 
             <br />
 
             <label>Phone Number</label>
-            <input type="tel" id="customer_phone" name="customer_phone" pattern="\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}" placeholder="(555) 123-4567" required />
+            <input type="tel" id="customer_phone" name="customer_phone" pattern="^\(\d{3}\) \d{3}-\d{4}$" placeholder="(555) 123-4567" required />
 
             <br />
 
             <label>Email</label>
-            <input type="email" id="customer_email" name="customer_email" placeholder="something@example.com" required />
+            <input type="email" id="customer_email" name="customer_email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" placeholder="something@example.com" required />
         
         </fieldset>
 
