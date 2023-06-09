@@ -1,10 +1,10 @@
 {% extends "stores.j2" %}
-{% block main_heading %}{{ super() }} / Delete Store{% endblock %}
+{% block main_heading %}<span class="blue">{{ super() }} /</span> Delete Store{% endblock %}
 
 {% block main_content %}
 
 <div>
-    <p>Warning: The following action cannot be undone.</p>
+    <p class="yellow">Warning: The following action cannot be undone.</p>
 </div>
 
 <div id="delete_store">
@@ -29,7 +29,7 @@
 
             <label>Email</label>
             <input type="email" value="{{ data[0].Email }}" id="store_email" name="store_email" disabled />
-        
+
         </fieldset>
 
         <p>

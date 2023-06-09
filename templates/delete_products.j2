@@ -1,10 +1,10 @@
 {% extends "products.j2" %}
-{% block main_heading %}{{ super() }} / Delete Product{% endblock %}
+{% block main_heading %}<span class="blue">{{ super() }} /</span> Delete Product{% endblock %}
 
 {% block main_content %}
 
 <div>
-    <p>Warning: The following action cannot be undone.</p>
+    <p class="yellow">Warning: The following action cannot be undone.</p>
 </div>
 
 <div id="delete_product">
@@ -24,7 +24,7 @@
 
             <label>Price</label>
             <input value="{{ data[0].Price }}" id="product_price" name="product_price" disabled />
-        
+
         </fieldset>
 
         <p>

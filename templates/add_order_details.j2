@@ -1,5 +1,5 @@
 {% extends "orders.j2" %}
-{% block main_heading %}{{ super() }} / Add Order Detail{% endblock %}
+{% block main_heading %}<span class="blue">{{ super() }} /</span> Add Order Detail{% endblock %}
 
 {% block main_content %}
 
@@ -10,28 +10,28 @@
 
             <label>Order ID</label>
             <select id="order_id" name="order_id" required>
-            {% if orders %}
+                {% if orders %}
                 <option value="" selected disabled hidden>Order ID | Date | Customer | Store Number</option>
                 {% for item in orders %}
-                    <option value="{{ item['order_id'] }}">{{ item['Order'] }}</option>
+                <option value="{{ item['order_id'] }}">{{ item['Order'] }}</option>
                 {% endfor %}
                 {% if null_orders %}
-                    {% for item in null_orders %}
-                        <option value="{{ item['order_id'] }}">{{ item['Order'] }}</option>
-                    {% endfor %}
+                {% for item in null_orders %}
+                <option value="{{ item['order_id'] }}">{{ item['Order'] }}</option>
+                {% endfor %}
                 {% endif %}
-            {% endif %}
+                {% endif %}
             </select>
 
             <br />
 
             <label>Product</label>
             <select id="product_description" name="product_description" required>
-            {% if products %}
+                {% if products %}
                 {% for item in products %}
-                    <option value="{{ item['product_id'] }}">{{ item['product_description'] }}</option>
+                <option value="{{ item['product_id'] }}">{{ item['product_description'] }}</option>
                 {% endfor %}
-            {% endif %}
+                {% endif %}
             </select>
 
             <br />

@@ -1,10 +1,10 @@
 {% extends "orders.j2" %}
-{% block main_heading %}{{ super() }} / Delete Order{% endblock %}
+{% block main_heading %}<span class="blue">{{ super() }} /</span> Delete Order{% endblock %}
 
 {% block main_content %}
 
 <div>
-    <p>Warning: The following action cannot be undone.</p>
+    <p class="yellow">Warning: The following action cannot be undone.</p>
 </div>
 
 <div id="delete_order">

@@ -1,5 +1,5 @@
 {% extends "products.j2" %}
-{% block main_heading %}{{ super() }} / Update Product{% endblock %}
+{% block main_heading %}<span class="blue">{{ super() }} /</span> Update Product{% endblock %}
 
 {% block main_content %}
 
@@ -41,13 +41,15 @@
             <br />
 
             <label>Description</label>
-            <input type="text" value="{{ data[0].Description }}" id="product_description" name="product_description" required />
+            <input type="text" value="{{ data[0].Description }}" id="product_description" name="product_description"
+                required />
 
             <br />
 
             <label>Price</label>
-            <input type="number" value="{{ data[0].Price }}" id="product_price" name="product_price" step="0.01" required />
-        
+            <input type="number" value="{{ data[0].Price }}" id="product_price" name="product_price" step="0.01"
+                required />
+
         </fieldset>
 
         <p>
