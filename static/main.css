@@ -10,6 +10,7 @@ body {
     margin: auto;
     padding: auto;
     text-align: center;
+    margin: auto;
 }
 
 h1 {
@@ -41,7 +42,14 @@ h2 {
 }
 
 nav a {
+    font-weight: bold;
+    font-size: 1em;
+    color: #185875;
     padding: 5px 20px;
+}
+
+nav a:hover {
+    color: #FFF842;
 }
 
 main {
@@ -49,16 +57,74 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /*min-height: 50vh;*/
 }
 
-td {
-    padding: 0 10px;
-    text-align: center;
+/**-------------------------------------------------------------------
+ * TABLE
+ * -------------------------------------------------------------------
+ */
+
+table {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 th {
-    padding: 0 15px;
+    padding: 2% 15px;
+    font-weight: bold;
+    font-size: 1em;
+    color: #185875;
+    background-color: #1F2739;
+}
+
+td {
+    padding: 2% 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1em;
+    box-shadow: 0 2px 2px 2px #0E1119;
+    -moz-box-shadow: 0 2px 2px 2px #0E1119;
+    -webkit-box-shadow: 0 2px 2px 2px #0E1119;
+}
+
+tr:nth-child(odd) {
+    background-color: #323C50;
+}
+
+tr:nth-child(even) {
+    background-color: #2C3446;
+}
+
+td:first-child {
+    color: #FB667A;
+}
+
+tr:hover {
+    background-color: #464A52;
+    box-shadow: 0 6px 6px -6px #0E1119;
+    -moz-box-shadow: 0 6px 6px -6px #0E1119;
+    -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+td:hover {
+    background-color: #FFF842;
+    color: #403E10;
+    box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+    transform: translate3d(6px, -6px, 0);
+    transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+    transition-timing-function: line;
+}
+
+td:nth-last-child(2):hover {
+    background-color: #4DC3FA;
+    box-shadow: #3483A7 -1px 1px, #3483A7 -2px 2px, #3483A7 -3px 3px, #3483A7 -4px 4px, #3483A7 -5px 5px, #3483A7 -6px 6px;
+}
+
+td:last-child:hover {
+    background-color: #FB667A;
+    box-shadow: #9F3D4A -1px 1px, #9F3D4A -2px 2px, #9F3D4A -3px 3px, #9F3D4A -4px 4px, #9F3D4A -5px 5px, #9F3D4A -6px 6px;
 }
 
 input[type="email"] {
