@@ -87,6 +87,10 @@ td {
     -webkit-box-shadow: 0 2px 2px 2px #0E1119;
 }
 
+td a {
+    display: block;
+}
+
 tr:nth-child(odd) {
     background-color: #323C50;
 }
@@ -96,6 +100,14 @@ tr:nth-child(even) {
 }
 
 td:first-child {
+    color: #FB667A;
+}
+
+td:nth-last-child(2) a {
+    color: #4DC3FA;
+}
+
+td:last-child a {
     color: #FB667A;
 }
 
@@ -119,12 +131,19 @@ td:hover {
 
 td:nth-last-child(2):hover {
     background-color: #4DC3FA;
+    color: #0E1119;
     box-shadow: #3483A7 -1px 1px, #3483A7 -2px 2px, #3483A7 -3px 3px, #3483A7 -4px 4px, #3483A7 -5px 5px, #3483A7 -6px 6px;
 }
 
 td:last-child:hover {
     background-color: #FB667A;
+    color: #0E1119;
     box-shadow: #9F3D4A -1px 1px, #9F3D4A -2px 2px, #9F3D4A -3px 3px, #9F3D4A -4px 4px, #9F3D4A -5px 5px, #9F3D4A -6px 6px;
+}
+
+td:nth-last-child(2):hover a,
+td:last-child:hover a {
+    color: #0E1119;
 }
 
 input[type="email"] {
