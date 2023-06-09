@@ -139,7 +139,6 @@ def add_customers():
             return redirect("/customers")
 
 
-# route for deleting a Customer
 @app.route("/delete_customers/<int:customer_id>", methods=["GET", "POST"])
 def delete_customers(customer_id):
     """Delete a Customer from the database."""

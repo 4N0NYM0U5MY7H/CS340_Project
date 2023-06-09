@@ -1,3 +1,55 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+body {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    line-height: 1.42em;
+    color: #A7A1AE;
+    background-color: #1F2739;
+    margin: auto;
+    padding: auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    line-height: 1em;
+    text-align: center;
+    color: #4DC3FA;
+}
+
+h1 i {
+    padding-right: 1em;
+}
+
+h2 {
+    color: #FB667A;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.blue {
+    color: #5B8FB9;
+
+}
+
+.yellow {
+    color: #FFF842;
+}
+
+nav a {
+    padding: 5px 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /*min-height: 50vh;*/
+}
+
 td {
     padding: 0 10px;
     text-align: center;
