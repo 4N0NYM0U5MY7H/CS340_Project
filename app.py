@@ -267,13 +267,23 @@ def add_products():
             product_description = request.form["product_description"]
             product_price = request.form["product_price"]
 
-            # Insert new Product into database.
-            query = "INSERT INTO Products (product_description, product_price) VALUES (%s, %s);"
-            cur = mysql.connection.cursor()
-            cur.execute(query, (product_description, product_price))
-            mysql.connection.commit()
+            # checks if product_price is not valid
+            if float(product_price) < 0:
+                flash("Price cannot be less than 0.")
+                return render_template("add_products.j2")
 
-            return redirect("/products")
+            # handles duplicate entries of unique values
+            try:
+                # Insert new Product into database.
+                query = "INSERT INTO Products (product_description, product_price) VALUES (%s, %s);"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (product_description, product_price))
+                mysql.connection.commit()
+                
+                return redirect("/products")
+            except:
+                flash("Duplicate entries of Description not allowed.")
+                return render_template("add_products.j2")
 
 
 @app.route("/delete_products/<int:product_id>", methods=["GET", "POST"])
@@ -328,14 +338,29 @@ def update_products(product_id):
             product_description = request.form["product_description"]
             product_price = request.form["product_price"]
 
-            query = """UPDATE Products
-                    SET product_description = %s, product_price = %s
-                    WHERE product_id = %s;"""
-            cur = mysql.connection.cursor()
-            cur.execute(query, (product_description, product_price, product_id))
-            mysql.connection.commit()
+            # checks if product_price is not valid
+            if float(product_price) < 0:
+                flash("Price cannot be less than 0.")
 
-            return redirect("/products")
+                query = """SELECT product_id AS 'ID', 
+                        product_description AS 'Description', 
+                        product_price AS 'Price' 
+                        FROM Products WHERE product_id = %s;"""
+                cur = mysql.connection.cursor()
+                cur.execute(query, (product_id,))
+                data = cur.fetchall()
+                
+                return render_template("update_products.j2", data=data)
+            # product_price is valid
+            else:
+                query = """UPDATE Products
+                        SET product_description = %s, product_price = %s
+                        WHERE product_id = %s;"""
+                cur = mysql.connection.cursor()
+                cur.execute(query, (product_description, product_price, product_id))
+                mysql.connection.commit()
+
+                return redirect("/products")
 
 
 #    ______
@@ -395,13 +420,18 @@ def add_stores():
                 flash("Email must be in the format: heroelectronics1@email.com")
                 return redirect("/add_stores")
 
-            # Insert new Store into database.
-            query = "INSERT INTO Stores (store_number, store_phone, store_email) VALUES (%s, %s, %s);"
-            cur = mysql.connection.cursor()
-            cur.execute(query, (store_number, store_phone, store_email))
-            mysql.connection.commit()
+            # handles duplicate entries of unique values
+            try:
+                # Insert new Store into database.
+                query = "INSERT INTO Stores (store_number, store_phone, store_email) VALUES (%s, %s, %s);"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (store_number, store_phone, store_email))
+                mysql.connection.commit()
 
-            return redirect("/stores")
+                return redirect("/stores")
+            except:
+                flash("Duplicate entries of Store Number not allowed.")
+                return render_template("add_stores.j2")
 
 
 @app.route("/delete_stores/<int:store_id>", methods=["GET", "POST"])
@@ -541,13 +571,53 @@ def add_store_products():
             product_id = request.form["product_description"]
             number_in_stock = request.form["number_in_stock"]
 
-            # Insert new Store Product into database.
-            query = "INSERT INTO StoreProducts (store_id, product_id, number_in_stock) VALUES (%s, %s, %s);"
-            cur = mysql.connection.cursor()
-            cur.execute(query, (store_id, product_id, number_in_stock))
-            mysql.connection.commit()
+            # checks if number_in_stock is not valid
+            if int(number_in_stock) < 0:
+                flash("Number in Stock value cannot be less than 0.")
+                
+                # Store ID/Number data for dropdown.
+                query = "SELECT store_id, store_number FROM Stores;"
+                cur = mysql.connection.cursor()
+                cur.execute(query)
+                store_data = cur.fetchall()
 
-            return redirect("/store_products")
+                # Product ID/Description data for dropdown.
+                query2 = "SELECT product_id, product_description FROM Products;"
+                cur = mysql.connection.cursor()
+                cur.execute(query2)
+                product_data = cur.fetchall()
+
+                return render_template(
+                    "add_store_products.j2", stores=store_data, products=product_data
+                )
+
+            # handles duplicate entries of unique combination of store_id and product_id
+            try:
+                # Insert new Store Product into database.
+                query = "INSERT INTO StoreProducts (store_id, product_id, number_in_stock) VALUES (%s, %s, %s);"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (store_id, product_id, number_in_stock))
+                mysql.connection.commit()
+
+                return redirect("/store_products")
+            except:
+                flash("Duplicate entries of Store Number and Product not allowed.")
+                
+                # Store ID/Number data for dropdown.
+                query = "SELECT store_id, store_number FROM Stores;"
+                cur = mysql.connection.cursor()
+                cur.execute(query)
+                store_data = cur.fetchall()
+
+                # Product ID/Description data for dropdown.
+                query2 = "SELECT product_id, product_description FROM Products;"
+                cur = mysql.connection.cursor()
+                cur.execute(query2)
+                product_data = cur.fetchall()
+
+                return render_template(
+                    "add_store_products.j2", stores=store_data, products=product_data
+                )
 
 
 @app.route("/delete_store_products/<int:store_product_id>", methods=["GET", "POST"])
@@ -629,16 +699,53 @@ def update_store_products(store_product_id):
             product_id = request.form["product_description"]
             number_in_stock = request.form["number_in_stock"]
 
-            query = """UPDATE StoreProducts
-                    SET store_id = %s, product_id = %s, number_in_stock = %s
-                    WHERE store_product_id = %s;"""
-            cur = mysql.connection.cursor()
-            cur.execute(
-                query, (store_id, product_id, number_in_stock, store_product_id)
-            )
-            mysql.connection.commit()
+            # checks if number_in_stock is not valid
+            if int(number_in_stock) < 0:
+                flash("Number in Stock value cannot be less than 0.")
 
-            return redirect("/store_products")
+                query = """SELECT
+                        store_product_id AS 'ID',
+                        Stores.store_number AS 'Store Number',
+                        Products.product_description AS 'Product',
+                        number_in_stock AS 'In Stock'
+                        FROM StoreProducts
+                        INNER JOIN Stores ON Stores.store_id = StoreProducts.store_id
+                        INNER JOIN Products ON Products.product_id = StoreProducts.product_id
+                        WHERE store_product_id = %s;"""
+                cur = mysql.connection.cursor()
+                cur.execute(query, (store_product_id,))
+                data = cur.fetchall()
+
+                # Store ID/Number data for dropdown.
+                query2 = "SELECT store_id, store_number FROM Stores;"
+                cur = mysql.connection.cursor()
+                cur.execute(query2)
+                store_data = cur.fetchall()
+
+                # Product ID/Description data for dropdown.
+                query3 = "SELECT product_id, product_description FROM Products;"
+                cur = mysql.connection.cursor()
+                cur.execute(query3)
+                product_data = cur.fetchall()
+
+                return render_template(
+                    "update_store_products.j2",
+                    data=data,
+                    stores=store_data,
+                    products=product_data,
+                )
+            else:
+                # number_in_stock is valid
+                query = """UPDATE StoreProducts
+                        SET store_id = %s, product_id = %s, number_in_stock = %s
+                        WHERE store_product_id = %s;"""
+                cur = mysql.connection.cursor()
+                cur.execute(
+                    query, (store_id, product_id, number_in_stock, store_product_id)
+                )
+                mysql.connection.commit()
+
+                return redirect("/store_products")
 
 
 #   ____         __                __  ____         __        ___      __       _ __
@@ -781,13 +888,96 @@ def add_order_details():
             order_quantity = request.form["order_quantity"]
             line_total = request.form["line_total"]
 
-            # Insert new OrderDetail into database.
-            query = "INSERT INTO OrderDetails (order_id, product_id, order_quantity, line_total) VALUES (%s, %s, %s, %s);"
-            cur = mysql.connection.cursor()
-            cur.execute(query, (order_id, product_id, order_quantity, line_total))
-            mysql.connection.commit()
+            # checks if order_quantity or line_total are not valid
+            if int(order_quantity) < 0 or float(line_total) < 0:
+                if int(order_quantity) < 0 and float(line_total) < 0:
+                    flash("Quantity and Line Total cannot be less than 0.")
+                elif int(order_quantity) < 0:
+                    flash("Quantity cannot be less than 0.")
+                elif float(line_total) < 0:
+                    flash("Line Total cannot be less than 0.")
 
-            return redirect("/orders")
+                # Order ID data for dropdown if customer is not NULL.
+                query = """SELECT
+                        order_id,
+                        CONCAT(order_id, ' | ', order_date, ' | ', Customers.customer_name, ' | ', Stores.store_number) AS 'Order'
+                        FROM Orders
+                        INNER JOIN Customers ON Customers.customer_id = Orders.customer_id
+                        INNER JOIN Stores ON Stores.store_id = Orders.store_id;"""
+                cur = mysql.connection.cursor()
+                cur.execute(query)
+                order_data = cur.fetchall()
+
+                # Order ID data for dropdown if customer is NULL.
+                query2 = """SELECT
+                        order_id,
+                        CONCAT(order_id, ' | ', order_date, ' | ', 'None', ' | ', Stores.store_number) AS 'Order'
+                        FROM Orders
+                        INNER JOIN Stores ON Stores.store_id = Orders.store_id
+                        WHERE Orders.customer_id is NULL;"""
+                cur = mysql.connection.cursor()
+                cur.execute(query2)
+                null_order_data = cur.fetchall()
+
+                # Product ID/Description data for dropdown.
+                query3 = "SELECT product_id, product_description FROM Products;"
+                cur = mysql.connection.cursor()
+                cur.execute(query3)
+                product_data = cur.fetchall()
+
+                return render_template(
+                    "add_order_details.j2",
+                    orders=order_data,
+                    products=product_data,
+                    null_orders=null_order_data,
+                )
+
+            # handles duplicate entries of unique combination of order_id and product_id
+            try:
+                # Insert new OrderDetail into database.
+                query = "INSERT INTO OrderDetails (order_id, product_id, order_quantity, line_total) VALUES (%s, %s, %s, %s);"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (order_id, product_id, order_quantity, line_total))
+                mysql.connection.commit()
+
+                return redirect("/orders")
+            except:
+                flash("Duplicate entries of Order ID and Product not allowed.")
+                
+                # Order ID data for dropdown if customer is not NULL.
+                query = """SELECT
+                        order_id,
+                        CONCAT(order_id, ' | ', order_date, ' | ', Customers.customer_name, ' | ', Stores.store_number) AS 'Order'
+                        FROM Orders
+                        INNER JOIN Customers ON Customers.customer_id = Orders.customer_id
+                        INNER JOIN Stores ON Stores.store_id = Orders.store_id;"""
+                cur = mysql.connection.cursor()
+                cur.execute(query)
+                order_data = cur.fetchall()
+
+                # Order ID data for dropdown if customer is NULL.
+                query2 = """SELECT
+                        order_id,
+                        CONCAT(order_id, ' | ', order_date, ' | ', 'None', ' | ', Stores.store_number) AS 'Order'
+                        FROM Orders
+                        INNER JOIN Stores ON Stores.store_id = Orders.store_id
+                        WHERE Orders.customer_id is NULL;"""
+                cur = mysql.connection.cursor()
+                cur.execute(query2)
+                null_order_data = cur.fetchall()
+
+                # Product ID/Description data for dropdown.
+                query3 = "SELECT product_id, product_description FROM Products;"
+                cur = mysql.connection.cursor()
+                cur.execute(query3)
+                product_data = cur.fetchall()
+
+                return render_template(
+                    "add_order_details.j2",
+                    orders=order_data,
+                    products=product_data,
+                    null_orders=null_order_data,
+                )
 
 
 @app.route("/delete_orders/<int:order_id>", methods=["GET", "POST"])

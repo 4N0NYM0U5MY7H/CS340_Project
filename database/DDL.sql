@@ -25,7 +25,7 @@ INSERT INTO Customers (customer_name, customer_phone, customer_email) VALUES
 DROP TABLE IF EXISTS Products;
 CREATE TABLE Products (
     product_id int NOT NULL AUTO_INCREMENT,
-    product_description varchar(255) NOT NULL,
+    product_description varchar(255) NOT NULL UNIQUE,
     product_price decimal(19,2) NOT NULL,
     PRIMARY KEY (product_id)
 );
@@ -42,7 +42,7 @@ INSERT INTO Products (product_description, product_price) VALUES
 DROP TABLE IF EXISTS Stores;
 CREATE TABLE Stores (
     store_id int NOT NULL AUTO_INCREMENT,
-    store_number varchar(50) NOT NULL,
+    store_number varchar(50) NOT NULL UNIQUE,
     store_phone varchar(20) NOT NULL,
     store_email varchar(255) NOT NULL,
     PRIMARY KEY (store_id)
@@ -90,7 +90,8 @@ CREATE TABLE StoreProducts (
     FOREIGN KEY (store_id) REFERENCES Stores(store_id)
     ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES Products(product_id)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+    UNIQUE (store_id, product_id)
 );
 
 -- Example Data for StoreProducts
@@ -113,7 +114,8 @@ CREATE TABLE OrderDetails (
     FOREIGN KEY (order_id) REFERENCES Orders(order_id)
     ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES Products(product_id)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+    UNIQUE (order_id, product_id)
 );
 
 -- Example Data for OrderDetails Table

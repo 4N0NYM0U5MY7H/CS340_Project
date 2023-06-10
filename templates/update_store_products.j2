@@ -30,6 +30,14 @@
 <br />
 <br />
 
+{% if get_flashed_messages() %}
+<div id="flash_messages">
+    {% for message in get_flashed_messages() %}
+    <p class="yellow">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
 <div>
     <form id="updateStoreProduct" action="{{ url_for('update_store_products', store_product_id=data[0].ID) }}"
         method="POST">

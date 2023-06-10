@@ -6,7 +6,7 @@
 {% if get_flashed_messages() %}
 <div id="flash_messages">
     {% for message in get_flashed_messages() %}
-    <p>{{ message }}</p>
+    <p class="yellow">{{ message }}</p>
     {% endfor %}
 </div>
 {% endif %}

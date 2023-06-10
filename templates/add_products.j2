@@ -3,6 +3,14 @@
 
 {% block main_content %}
 
+{% if get_flashed_messages() %}
+<div id="flash_messages">
+    {% for message in get_flashed_messages() %}
+    <p class="yellow">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
 <div id="add_product">
     <form id="addProduct" action="{{ url_for('add_products') }}" method="POST">
         <fieldset>
