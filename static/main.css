@@ -5,7 +5,7 @@ body {
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
     line-height: 1.42em;
-    color: #A7A1AE;
+    color: #CCC3D6;
     background-color: #1F2739;
     margin: auto;
     padding: auto;
@@ -27,7 +27,7 @@ h2 {
     display: block;
     line-height: 1em;
     padding-bottom: 2em;
-    color: #FB667A;
+    color: #E43950;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -44,12 +44,16 @@ h2 {
 nav a {
     font-weight: bold;
     font-size: 1em;
-    color: #185875;
+    color: #5aa6c9;
     padding: 5px 20px;
 }
 
 nav a:hover {
     color: #FFF842;
+}
+
+.random {
+    color: #CCC3D6;
 }
 
 main {
@@ -73,7 +77,7 @@ th {
     padding: 2% 15px;
     font-weight: bold;
     font-size: 1em;
-    color: #185875;
+    color: #2399CF;
     background-color: #1F2739;
 }
 
@@ -100,11 +104,11 @@ tr:nth-child(even) {
 }
 
 td:first-child {
-    color: #FB667A;
+    color: #FFF842;
 }
 
 td:nth-last-child(2) a {
-    color: #4DC3FA;
+    color: #7498D1;
 }
 
 td:last-child a {
@@ -130,7 +134,7 @@ td:hover {
 }
 
 td:nth-last-child(2):hover {
-    background-color: #4DC3FA;
+    background-color: #7498D1;
     color: #0E1119;
     box-shadow: #3483A7 -1px 1px, #3483A7 -2px 2px, #3483A7 -3px 3px, #3483A7 -4px 4px, #3483A7 -5px 5px, #3483A7 -6px 6px;
 }
