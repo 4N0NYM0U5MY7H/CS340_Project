@@ -150,6 +150,89 @@ td:last-child:hover a {
     color: #0E1119;
 }
 
-input[type="email"] {
+/**-------------------------------------------------------------------
+ * FORM
+ * -------------------------------------------------------------------
+ */
+
+form {
+    margin: 0 auto;
+}
+
+label {
+    display: inline-block;
+    text-align: left;
+    padding: 2% 15px;
+}
+
+input,
+select,
+textarea {
+    display: inline-block;
     width: 200px;
+    padding: 2% 15px;
+}
+
+button,
+input[type="button"],
+input[type="submit"] {
+    float: none;
+}
+
+#addCustomer input,
+#addProduct input,
+#addStore input,
+#addStoreProduct input,
+#addStoreProduct select,
+#addOrder input,
+#addOrder select,
+#addOrder textarea,
+#addOrderDetail input,
+#addOrderDetail select,
+#updateCustomer input,
+#updateProduct input,
+#updateStore input,
+#updateStoreProduct input,
+#updateStoreProduct select,
+#deleteCustomer input,
+#deleteProduct input,
+#deleteStore input,
+#deleteStoreProduct input,
+#deleteOrder input,
+#deleteOrder textarea {
+    float: right;
+}
+
+#addCustomer input[type="button"],
+#addCustomer input[type="submit"],
+#addProduct input[type="button"],
+#addProduct input[type="submit"],
+#addStore input[type="button"],
+#addStore input[type="submit"],
+#addStoreProduct input[type="button"],
+#addStoreProduct input[type="submit"],
+#addOrder input[type="button"],
+#addOrder input[type="submit"],
+#addOrderDetail input[type="button"],
+#addOrderDetail input[type="submit"],
+#updateCustomer input[type="button"],
+#updateCustomer input[type="submit"],
+#updateProduct input[type="button"],
+#updateProduct input[type="submit"],
+#updateStore input[type="button"],
+#updateStore input[type="submit"],
+#updateStoreProduct input[type="button"],
+#updateStoreProduct input[type="submit"],
+#deleteCustomer input[type="button"],
+#deleteCustomer input[type="submit"],
+#deleteProduct input[type="button"],
+#deleteProduct input[type="submit"],
+#deleteStore input[type="button"],
+#deleteStore input[type="submit"],
+#deleteStoreProduct input[type="button"],
+#deleteStoreProduct input[type="submit"],
+#deleteOrder input[type="button"],
+#deleteOrder input[type="submit"] {
+    float: none;
+    margin: 2% auto;
 }
