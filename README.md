@@ -12,4 +12,4 @@ This project is a database-driven website for a ficticious company called _Hero 
 * [![Font Awesome v6.4.0](https://img.shields.io/badge/Font%20Awesome-v6.4.0-339AF0?logo=font-awesome&labelColor=141414&style=flat-square)](https://fontawesome.com/) — The Internet's icon libarary and toolkit.
 
 ## Sources Cited
-  Kochera, George, Michael Curry, and Andrew Kamand. “osu-cs340-ecampus/flask-starter-app.” GitHub, 2021, Accessed May 22, 2023. https://github.com/osu-cs340-ecampus/flask-starter-app#step-3---building-apppy.
+  Kochera, George, Michael Curry, and Andrew Kamand. “osu-cs340-ecampus/flask-starter-app.” GitHub, 2021, Accessed May 22, 2023. https://github.com/osu-cs340-ecampus/flask-starter-app.
